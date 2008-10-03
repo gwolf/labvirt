@@ -53,6 +53,22 @@ The following aspects should be available via the Web monitoring facility:
   check for its assigned virtual host is too artesanal)
 - The whole application is to be internationalizable, via Gettext
 
+=== Terminals
+
+This project is based on the idea of having several user profiles,
+which we will temporarily group under the "lab" term (although it
+might not be the best term... bear with it for now. A "lab" can be
+spread out over several offices, for what is worth)
+
+The computers that make up a lab will, for our purposes, be treated as
+mere terminals. After booting, they will be only configured to connect
+to us via HTTP and fetch a very basic configuration, which will be
+used to initialize the +rdesktop+ client.
+
+Said machines will have basically zero self-knowledge. The server
+dictates what IP address they should connect to. We have full control
+of the user experience. BWAHAHAHA.
+
 === Assumptions
 
 I decided to assume several things about this project's deployment -
@@ -90,6 +106,9 @@ forget about them.
 - Networking is done using the +TAP+ kernel  interface. I have to
   solve how to do this without requiring kvm to be started with root
   privileges... 
+- You have and control a DHCP server, that will give each virtual host
+  a predictable IP address based on its MAC address. This is
+  fundamental if you want to be able to connect to them!
 
 == Current status
 
