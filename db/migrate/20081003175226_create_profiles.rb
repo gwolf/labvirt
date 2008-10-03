@@ -17,6 +17,7 @@ class CreateProfiles < ActiveRecord::Migration
   end
 
   def self.down
+    drop_habtm :profiles, :disk_devs
     drop_table :profiles
   end
 end
