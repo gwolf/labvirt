@@ -1,0 +1,6 @@
+[submodule "vendor/plugins/acts_as_catalog"]
+	path = vendor/plugins/acts_as_catalog
+	url = gitosis@rubyforge.org:actsascatalog.git
+[submodule "vendor/plugins/real_fk"]
+	path = vendor/plugins/real_fk
+	url = gitosis@rubyforge.org:realfk.git
