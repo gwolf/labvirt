@@ -53,6 +53,44 @@ The following aspects should be available via the Web monitoring facility:
   check for its assigned virtual host is too artesanal)
 - The whole application is to be internationalizable, via Gettext
 
+=== Assumptions
+
+I decided to assume several things about this project's deployment -
+It is better to document them upfront and in a single place than to
+forget about them. 
+
+- Virtualization is made through kvm (or qemu, which is
+  command-line-options compatible). Xen is out of the question for
+  now. And using libvirt gives some nice abstractions, but does not
+  provide some needed facilities (i.e. disks based on snapshots).
+- Virtual hard drives are sequentially filled. That means, if you are
+  emulating IDE drives, the first one will be primary-master, the
+  second primary-slave, the third secondary-master, the fourth
+  secondary-slave. What implications does this have? That it is very
+  preferrable for CD-ROMs to be secondary-masters (i.e. their
+  performance will be much better than if they are primary- or
+  secondary-slaves). Insert a dummy disk at primary slave and hide it
+  at the operating system level if this becomes an issue for you.
+- Virtual hosts will boot from the first HD. This means that if you
+  need to boot from a CD-ROM, you will have to launch the host
+  manually. Don't panic - We will provide a command line so you don't
+  have to panic.
+- VNC for virtual hosts will only be available through Unix-domain
+  sockets, not exposed to the network. That means, you need to at
+  least have SSH access to the server in order to connect to the VNC
+  sessions. 
+  - Ironically, please note I still don't know _how_ to connect to VNC
+    via Unix-domain sockets :-/ Anyway, there are... more things to
+    solve before hitting this.
+- Using the +virtio+ network interface is strongly advised - Of
+  course, this is no good when installing an operating system, as
+  they do not include the drivers. Install your host using a
+  well-known interface card emulation (i.e. RTL8139), and switch it
+  over to virtio
+- Networking is done using the +TAP+ kernel  interface. I have to
+  solve how to do this without requiring kvm to be started with root
+  privileges... 
+
 == Current status
 
 As of today, this project... Does not do anything useful, and is quite
