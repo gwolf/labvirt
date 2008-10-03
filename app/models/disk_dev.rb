@@ -1,5 +1,6 @@
 class DiskDev < ActiveRecord::Base
-  has_and_belongs_to_many :profiles
+  acts_as_list, :scope => :profile
+  belongs_to :profiles
   belongs_to :disk_type
   belongs_to :media_type
 

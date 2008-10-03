@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081003204536) do
+ActiveRecord::Schema.define(:version => 20081003222718) do
 
   create_table "disk_devs", :force => true do |t|
     t.string   "name"
@@ -18,18 +18,12 @@ ActiveRecord::Schema.define(:version => 20081003204536) do
     t.datetime "updated_at"
     t.integer  "disk_type_id",  :default => 1, :null => false
     t.integer  "media_type_id", :default => 1, :null => false
+    t.integer  "profile_id"
+    t.integer  "position",      :default => 1, :null => false
   end
 
+  add_index "disk_devs", ["position", "profile_id"], :name => "index_disk_devs_on_position_and_profile_id", :unique => true
   add_index "disk_devs", ["name"], :name => "index_disk_devs_on_name", :unique => true
-
-  create_table "disk_devs_profiles", :id => false, :force => true do |t|
-    t.integer "disk_dev_id"
-    t.integer "profile_id"
-  end
-
-  add_index "disk_devs_profiles", ["disk_dev_id", "profile_id"], :name => "index_disk_devs_profiles_on_disk_dev_id_and_profile_id", :unique => true
-  add_index "disk_devs_profiles", ["profile_id"], :name => "index_disk_devs_profiles_on_profile_id"
-  add_index "disk_devs_profiles", ["disk_dev_id"], :name => "index_disk_devs_profiles_on_disk_dev_id"
 
   create_table "disk_types", :force => true do |t|
     t.string "name", :null => false
@@ -57,6 +51,16 @@ ActiveRecord::Schema.define(:version => 20081003204536) do
 
   add_index "profiles", ["mac_base_addr"], :name => "index_profiles_on_mac_base_addr", :unique => true
   add_index "profiles", ["name"], :name => "index_profiles_on_name", :unique => true
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "sys_confs", :force => true do |t|
     t.string   "key",        :null => false

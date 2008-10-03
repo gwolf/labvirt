@@ -10,14 +10,16 @@ class CreateProfiles < ActiveRecord::Migration
       t.boolean    :active, :null => false, :default => true
       t.timestamps
     end
-    create_habtm :profiles, :disk_devs
+
+    add_reference :disk_devs, :profiles
+    add_column :disk_devs, :position, :integer, :null => false, :default => 1
 
     add_index :profiles, :name, :unique => true
     add_index :profiles, :mac_base_addr, :unique => true
+    add_index :disk_devs, [:position, :profile_id], :unique => true
   end
 
   def self.down
-    drop_habtm :profiles, :disk_devs
-    drop_table :profiles
+    drop_columns :disk_devs, :profile_id, :position
   end
 end
