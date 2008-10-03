@@ -4,3 +4,6 @@
 [submodule "vendor/plugins/real_fk"]
 	path = vendor/plugins/real_fk
 	url = gitosis@rubyforge.org:realfk.git
+[submodule "vendor/plugins/acts_as_list"]
+	path = vendor/plugins/acts_as_list
+	url = git://github.com/rails/acts_as_list.git
