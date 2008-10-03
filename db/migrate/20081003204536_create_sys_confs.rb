@@ -7,7 +7,7 @@ class CreateSysConfs < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_index :sys_confs, :key, :unique => true
+    add_index :sys_confs, :key, :unique => true
   end
 
   def self.down

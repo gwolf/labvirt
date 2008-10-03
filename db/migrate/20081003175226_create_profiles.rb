@@ -10,7 +10,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.boolean    :active, :null => false, :default => true
       t.timestamps
     end
-    add_habtm :profiles, :disk_devs
+    create_habtm :profiles, :disk_devs
 
     add_index :profiles, :name, :unique => true
     add_index :profiles, :mac_base_addr, :unique => true

@@ -1,7 +1,7 @@
 class CreateDiskDevs < ActiveRecord::Migration
   def self.up
-    create_catalog :disk_types
-    create_catalog :media_types
+    create_catalogs :disk_types
+    create_catalogs :media_types
 
     %W(ide scsi virtio).each {|dt| DiskType.new(:name=>dt).save!}
     %W(disk cdrom).each {|mt| MediaType.new(:name=>mt).save!}
