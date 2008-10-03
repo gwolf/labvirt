@@ -27,5 +27,7 @@ class CreateProfiles < ActiveRecord::Migration
 
   def self.down
     drop_columns :disk_devs, :profile_id, :position
+    drop_table :profiles
+    drop_catalogs :net_ifaces
   end
 end
