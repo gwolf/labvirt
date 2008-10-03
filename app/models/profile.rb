@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
   has_many :disk_devs, :order => 'position'
+  belongs_to :net_iface
 
   validates_presence_of :name
   validates_uniqueness_of :name
