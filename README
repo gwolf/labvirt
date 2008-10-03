@@ -63,6 +63,14 @@ far from being advertisable.
 Gunnar Wolf <gwolf@gwolf.org>, Instituto de Investigaciones
 Económicas, UNAM
 
+Many details on interfacing with KVM (i.e. building the invocation
+command and querying for the guest hosts' status) were taken from
+Freddie Cash's fine "kvmctl" scripts, which can be found at:
+
+http://kvm.qumranet.com/kvmwiki/HowToConfigScript 
+http://article.gmane.org/gmane.comp.emulators.kvm.devel/18368
+http://www.sd73.bc.ca/downloads/kvmctl-2.0.0.tbz
+
 == Licensing
 
 This project is developed and distributed under an MIT-style license.

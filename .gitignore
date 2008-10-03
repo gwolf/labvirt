@@ -1,5 +1,5 @@
 *~
-turnos_pensiones.sqlite
+labvirt.sqlite
 log/*.log
 tmp/**/*
 doc/api
