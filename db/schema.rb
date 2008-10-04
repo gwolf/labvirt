@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081003222718) do
+ActiveRecord::Schema.define(:version => 20081003233832) do
 
   create_table "disk_devs", :force => true do |t|
     t.string   "name"
@@ -31,25 +31,42 @@ ActiveRecord::Schema.define(:version => 20081003222718) do
 
   add_index "disk_types", ["name"], :name => "index_disk_types_on_name", :unique => true
 
+  create_table "laboratories", :force => true do |t|
+    t.string   "name",                         :null => false
+    t.text     "descr"
+    t.string   "mac_base_addr",                :null => false
+    t.integer  "instances",     :default => 1, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "laboratories", ["mac_base_addr"], :name => "index_laboratories_on_mac_base_addr", :unique => true
+
   create_table "media_types", :force => true do |t|
     t.string "name", :null => false
   end
 
   add_index "media_types", ["name"], :name => "index_media_types_on_name", :unique => true
 
+  create_table "net_ifaces", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  add_index "net_ifaces", ["name"], :name => "index_net_ifaces_on_name", :unique => true
+
   create_table "profiles", :force => true do |t|
     t.string   "name",                            :null => false
-    t.string   "mac_base_addr",                   :null => false
     t.text     "descr"
     t.integer  "ram",           :default => 256,  :null => false
     t.string   "extra_params"
-    t.integer  "instances",     :default => 1,    :null => false
     t.boolean  "active",        :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "net_iface_id"
+    t.integer  "laboratory_id"
+    t.integer  "position",      :default => 1,    :null => false
   end
 
-  add_index "profiles", ["mac_base_addr"], :name => "index_profiles_on_mac_base_addr", :unique => true
   add_index "profiles", ["name"], :name => "index_profiles_on_name", :unique => true
 
   create_table "sessions", :force => true do |t|
