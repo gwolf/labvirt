@@ -9,6 +9,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.text       :descr
       t.integer    :ram, :null => false, :default => 256
       t.string     :extra_params
+      t.boolean    :maint_mode, :null => false, :default => false
       t.boolean    :active, :null => false, :default => true
       t.timestamps
     end
