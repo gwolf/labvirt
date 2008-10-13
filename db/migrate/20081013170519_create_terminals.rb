@@ -11,9 +11,9 @@ class CreateTerminals < ActiveRecord::Migration
         '-r disk:cdrom=/media/cdrom -u %USER% -p %PASSWD% %HOST%'
       ],
       [ 'VNC', '/usr/bin/vncviewer', '-PreferredEncoding hextile %HOST%']
-    ].each { |ct| ClientType.new(:name => ct[0], 
-                                 :path => ct[1],
-                                 :base_params => ct[2]).save! }
+    ].each { |tc| TermClass.new(:name => tc[0], 
+                                 :path => tc[1],
+                                 :base_params => tc[2]).save! }
 
     create_table :terminals do |t|
       t.string :ipaddr, :null => false
