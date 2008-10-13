@@ -103,9 +103,10 @@ forget about them.
   they do not include the drivers. Install your host using a
   well-known interface card emulation (i.e. RTL8139), and switch it
   over to virtio
-- Networking is done using the +TAP+ kernel  interface. I have to
-  solve how to do this without requiring kvm to be started with root
-  privileges... 
+- Networking is done using the +TAP+ kernel  interface. In order for
+  an unprivileged user to be able to start the hosts, you will have to
+  give him +sudo+ rights for the needed commands - namely, +ifconfig+,
+  +brctl+ and +tunctl+. 
 - You have and control a DHCP server, that will give each virtual host
   a predictable IP address based on its MAC address. This is
   fundamental if you want to be able to connect to them!
