@@ -13,14 +13,15 @@ class CreateTerminals < ActiveRecord::Migration
       [ 'VNC', '/usr/bin/vncviewer', '-PreferredEncoding hextile %HOST%']
     ].each { |tc| TermClass.new(:name => tc[0], 
                                  :path => tc[1],
-                                 :base_params => tc[2]).save! }
+                                 :params => tc[2]).save! }
 
     create_table :terminals do |t|
       t.string :ipaddr, :null => false
       t.string :serveraddr, :null => false
       t.timestamps
     end
-    add_reference :terminals, :term_classes, :null => false
+    add_reference(:terminals, :term_classes, :null => false, 
+                  :default => TermClass.find(:first, :order => 'id').id)
     add_index :terminals, :ipaddr, :unique => true
   end
 
