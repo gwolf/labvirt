@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081003233832) do
+ActiveRecord::Schema.define(:version => 20081027221513) do
 
   create_table "disk_devs", :force => true do |t|
     t.string   "name"
@@ -55,16 +55,17 @@ ActiveRecord::Schema.define(:version => 20081003233832) do
   add_index "net_ifaces", ["name"], :name => "index_net_ifaces_on_name", :unique => true
 
   create_table "profiles", :force => true do |t|
-    t.string   "name",                            :null => false
+    t.string   "name",                             :null => false
     t.text     "descr"
-    t.integer  "ram",           :default => 256,  :null => false
+    t.integer  "ram",           :default => 256,   :null => false
     t.string   "extra_params"
-    t.boolean  "active",        :default => true, :null => false
+    t.boolean  "maint_mode",    :default => false, :null => false
+    t.boolean  "active",        :default => true,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "net_iface_id"
     t.integer  "laboratory_id"
-    t.integer  "position",      :default => 1,    :null => false
+    t.integer  "position",      :default => 1,     :null => false
   end
 
   add_index "profiles", ["name"], :name => "index_profiles_on_name", :unique => true
@@ -88,5 +89,33 @@ ActiveRecord::Schema.define(:version => 20081003233832) do
   end
 
   add_index "sys_confs", ["key"], :name => "index_sys_confs_on_key", :unique => true
+
+  create_table "sysusers", :force => true do |t|
+    t.string   "name"
+    t.string   "login"
+    t.string   "passwd"
+    t.string   "pw_salt"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "term_classes", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "path",       :null => false
+    t.string   "params"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "terminals", :force => true do |t|
+    t.string   "ipaddr",                       :null => false
+    t.string   "serveraddr",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "term_class_id", :default => 1, :null => false
+  end
+
+  add_index "terminals", ["ipaddr"], :name => "index_terminals_on_ipaddr", :unique => true
 
 end
