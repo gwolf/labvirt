@@ -2,6 +2,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  before_filter :ck_user
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -12,4 +14,26 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+
+  protected
+  def public_actions
+    { :terminal => [:config],
+      :login => [:login, :logout] }
+  end
+
+  def ck_user
+    ctrl = request.path_parameters['controller'].to_sym
+    action = request.path_parameters['action'].to_sym
+
+    if session[:sysuser_id]
+      @sysuser = Sysuser.find_by_id(session[:sysuser_id])
+      return true if @sysuser
+    end
+
+    return true if public_actions.keys.include?(ctrl) and 
+      public_actions[ctrl].include?(action)
+
+    redirect_to :controller => 'login', :action => 'login'
+    return false
+  end
 end
