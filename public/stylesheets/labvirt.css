@@ -1,0 +1,292 @@
+/* Labvirt base stylesheet */
+/* */
+/* Graphical appearance based on a design by Jessika Camacho, done for */
+/* Instituto de Investigaciones Económicas (Economics Research */
+/* Institute - IIEc), UNAM, http://www.iiec.unam.mx/ */
+/* Laid out for use in Labvirt by Gunnar Wolf, IIEc UNAM. */
+/* */
+/* This stylesheet, together with its required graphical elements, */
+/* might be freely used and redistributed, with or without modifications, */
+/* for any means. Using this stylesheet in no way expresses any relation or */
+/* endorsement by IIEc-UNAM. */
+
+body {
+       margin:0px;
+       background-color:#333366;
+       font-family: Verdana, "Trebuchet MS", Arial, sans-serif;
+}
+
+/* General containers: */
+/* Page header and footer */
+#header { 
+          border-collapse: collapse;
+          width: 100%;
+          color: #face89;
+          font-size: 150%;
+          height: 86px;
+          background-image:url(header.png); 
+          padding-left: 1em;
+}
+
+
+#footer { clear: both;
+          height: 84px; 
+          width:100%; 
+          background-color: #666699; 
+          background-image:url(footer.png);
+          text-align: center;
+          font-size: 70%;
+}
+
+/* Login request */
+
+#loginreq {  
+        background-color: #fff7e2;
+        border: solid #face78 2px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+	margin-top: 3em;
+	margin-bottom: 7em;
+        padding: 1em;
+        text-align: center;
+        width: 60%;
+}
+
+/* Menu */
+
+#menu { float: left;
+/*         background-color: #CBCBE1; */
+        width: 20%;
+/*         background-image: url(menu.png); */
+        vertical-align: top;
+        font-family:"Trebuchet MS", Tahoma, Verdana, Arial, sans-serif;
+        font-size: 80%;
+}
+
+#menu ul {  
+        padding-top: 3px;
+        padding-left: 10px;
+        padding-bottom: 0;
+        padding-right: 0;
+        margin: 0;
+}
+
+#menu li {  
+	display: block; 
+        padding-top:3px;
+	padding-bottom: 0px; 
+	padding-left: 0px; 
+	padding-right: 0px; 
+	margin: 0px;
+	list-style-type: none;
+}
+
+#menu a {  
+	color:#036;
+	text-decoration:none;
+	display:block;
+}
+
+#menu a:hover {  
+        color:#663300; 
+}
+
+
+#main { /*float: left;*/
+        padding-left: 20%;
+        background-image: url(background.png);
+        background-position: 20% 0;
+        background-repeat: repeat-y;
+        min-height: 500px;
+        background-color:#FFF;
+	font-family: Verdana, "Trebuchet MS", Arial, sans-serif;
+	font-size:90%;
+        width: 80%;
+}
+
+#contents { 
+        background-color: #FFF;
+        padding: 1em;
+}
+
+#logindata { 
+        background-color:#fff7e2;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        text-align: right;
+        width: 100%;
+        font-size: 60%;
+        font-style: italic;
+}
+
+/* Base layout elements */
+
+h1{
+    font-size:140%;
+    color:#663300;
+    font-weight:bold;
+}
+
+h2 { 
+     color:#663300;
+     font-size:125%;
+}
+
+h3 { 
+     color:#663300;
+     font-size:110%;
+}
+
+p { 
+    font-size:100%;
+    color:#000000;
+    text-indent:2em;
+    line-height:1.3em;
+}
+
+a, a:visited {
+    color:#663300;
+    text-decoration:underline;
+    font-style:normal;
+}
+
+a:hover {
+          color:#000033;
+          text-decoration:underline;
+          font-style:normal;
+          background-color:#FFF7E4;
+}
+
+#loginreq {  
+    background-image:url(usrlogin.png);
+    background-repeat: no-repeat;
+    background-position: 0.5em 0.5em;
+}
+
+#flash-error, #flash-warning, #flash-notice { 
+       padding: 0.2em;
+       margin-left: auto;
+       margin-right: auto;
+       margin-top: 0.2em;
+       margin-bottom: 0.2em;
+       width: 70%;
+       text-align: center;
+       font-size: 120%;
+       display: block;
+}
+
+#flash-error { 
+       color: #f00;
+       background-color: #ffd;
+       border: solid #f00 2px;
+}
+
+#flash-warning {  
+       color: #000;
+       background-color: #eee;
+       border: solid #000 2px;
+}
+
+#flash-notice {  
+       color: #557;
+       background-color: #ddf;
+       border: solid #557 2px;
+}
+
+table { 
+    border-collapse: collapse;
+    border: solid #face78 2px;
+    margin: 0.5em;
+}
+
+td, th {  
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: left;
+}
+
+.info-row, .form-row { 
+    padding: 0.1em;
+    border: solid 1px #eee;
+}
+
+.info-title, .show-prompt {  
+    font-weight: bold;
+}
+
+.info-data, .show-data {  
+}
+
+.form-prompt {
+    display: block;
+    font-weight: bold;
+}
+
+.form-note {
+    display: block;
+    font-style: italic;
+    font-size: 80%;
+}
+
+.form-input {
+    display: block;
+}
+
+.form-input textarea {  
+    height: 10em;
+    width: 40em;
+}
+
+.checkbox {  
+    border: solid 1px #fff;
+    background: #eee;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+.listing-head { 
+    background: #fff7e2;
+}
+
+.listing-even { 
+    background: #ccc5b0;
+}
+
+.listing-odd {  
+    background: #eee6d1;
+}
+
+.note { 
+    font-style: italic;
+    font-size: 70%;
+}
+
+.labvirt-show-prompt {  
+    font-weight: bold;
+}
+
+.labvirt-show-data {  
+}
+
+.labvirt-form-prompt {
+    display: block;
+    font-weight: bold;
+}
+
+.labvirt-form-note {
+    display: block;
+    font-style: italic;
+    font-size: 80%;
+}
+
+.labvirt-form-input {
+    display: block;
+}
+
+.labvirt-checkbox {  
+    border: solid 1px #fff;
+    background: #eee;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
