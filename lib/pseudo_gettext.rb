@@ -11,7 +11,7 @@
 =end
 
 begin
-  require 'gettext/rails'
+  require '_gettext/rails'
 rescue MissingSourceFile
 end
 
