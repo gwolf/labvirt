@@ -19,6 +19,7 @@
 # [serveraddr] The IP address of the server it should connect to
 class Terminal < ActiveRecord::Base
   belongs_to :term_class
+  has_many :term_params
 
   # The server address is not validated - we can often get here
   # symbolic hostnames instead of IP addresses
@@ -26,7 +27,7 @@ class Terminal < ActiveRecord::Base
   validates_presence_of :serveraddr
   validates_presence_of :term_class_id
   validates_uniqueness_of :ipaddr
-  validates_format_of :ipaddr, :with => /\A(?:(?:25[0-5]|2[0-4][0-9]|01?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|01?[0-9][0-9]?)\Z/
+  validates_format_of :ipaddr, :with => /\A(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\Z/
   validates_associated :term_class
 
   # Builds the command line to be called based on the #path to run
@@ -35,10 +36,12 @@ class Terminal < ActiveRecord::Base
     "#{term_class.path} #{client_params(options)}"
   end
 
-  # Builds the client parameters, based on the received options. Each
-  # of the options is replaced where its corresponding template
-  # appears on the #TermClass.params definition. As an example, if
-  # #TermClass.params is:
+  # Builds the client parameters, based on serveraddr (which will
+  # replace %HOST%), term_params (replacing their corresponding
+  # uppercase key) and the received options. Each of the options is
+  # replaced where its corresponding template appears on the
+  # #TermClass.params definition. As an example, if #TermClass.params
+  # is:
   #
   #   -u %USER% -p %PASSWD% -h %HOST%
   #
@@ -50,11 +53,22 @@ class Terminal < ActiveRecord::Base
   # the result will be:
   #
   #   -u john -p pr1vat3 -h 127.0.0.1
+  #
+  # Keep in mind that the specified options will overrule the
+  # term_params, and term_params overrule serveraddr. That means, this
+  # same result would be received if the terminal's serveraddr was
+  # 127.0.0.1 and it had 'user' => 'john' and 'passwd' => 'pr1vat3' as
+  # its term_params.
   def client_params(options={})
     cmd = term_class.params
-    options.keys.each do |k|
+
+    params = { 'HOST' => serveraddr }
+    term_params.each {|tp| params[tp.name.to_s.upcase] = tp.value}
+    params.merge!(options)
+
+    params.keys.each do |k|
       tmpl = "%#{k.to_s.upcase}%"
-      cmd.gsub! /#{tmpl}/, options[k]
+      cmd.gsub! /#{tmpl}/, params[k]
     end
     cmd
   end

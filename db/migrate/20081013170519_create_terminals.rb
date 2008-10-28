@@ -23,6 +23,13 @@ class CreateTerminals < ActiveRecord::Migration
     add_reference(:terminals, :term_classes, :null => false, 
                   :default => TermClass.find(:first, :order => 'id').id)
     add_index :terminals, :ipaddr, :unique => true
+
+    create_table :term_params do |t|
+      t.string :name, :null => false
+      t.string :value
+    end
+    add_reference(:term_params, :terminals)
+    add_index :term_params, :terminal_id
   end
 
   def self.down

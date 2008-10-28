@@ -3,9 +3,15 @@
 require 'pseudo_gettext'
 
 class ApplicationController < ActionController::Base
+  class AuthenticationRequired < Exception; end
+  rescue_from AuthenticationRequired do |err|
+    redirect_to :controller => 'login'
+  end
+
   init_gettext 'labvirt'
   before_filter :ck_user
   before_filter :header_and_footer
+  before_filter :set_lang
 
   helper :all # include all helpers, all the time
 
@@ -39,15 +45,16 @@ class ApplicationController < ActionController::Base
       return true if @sysuser
     end
 
-    # Is the user requesting a nonpublic area?
-    if !is_public_action?(ctrl, action)
-      # Request a login
-      redirect_to :controller => 'login', :action => 'login'
-      return false
-    end
+    # Is the user requesting a public action?
+    raise AuthenticationRequired unless is_public_action?(ctrl, action)
 
     # Ok, this is a public area - go ahead
     return true
+  end
+
+  def set_lang
+    return true unless lang = params[:lang]
+    cookies[:lang] = {:value => lang, :expires => Time.now+1.day, :path => '/'}
   end
 
   def header_and_footer

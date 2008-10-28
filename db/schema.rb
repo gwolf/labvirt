@@ -108,6 +108,14 @@ ActiveRecord::Schema.define(:version => 20081027221513) do
     t.datetime "updated_at"
   end
 
+  create_table "term_params", :force => true do |t|
+    t.string  "name",        :null => false
+    t.string  "value"
+    t.integer "terminal_id"
+  end
+
+  add_index "term_params", ["terminal_id"], :name => "index_term_params_on_terminal_id"
+
   create_table "terminals", :force => true do |t|
     t.string   "ipaddr",                       :null => false
     t.string   "serveraddr",                   :null => false
