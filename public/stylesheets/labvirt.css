@@ -206,7 +206,7 @@ td, th {
     text-align: left;
 }
 
-.info-row, .form-row { 
+.table-row, .form-row { 
     padding: 0.1em;
     border: solid 1px #eee;
 }
@@ -245,15 +245,15 @@ td, th {
     padding-right: 0.3em;
 }
 
-.listing-head { 
+.table-head { 
     background: #fff7e2;
 }
 
-.listing-even { 
+.table-even { 
     background: #ccc5b0;
 }
 
-.listing-odd {  
+.table-odd {  
     background: #eee6d1;
 }
 

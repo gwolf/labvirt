@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   init_gettext 'labvirt'
   before_filter :ck_user
+  before_filter :gen_menu
   before_filter :header_and_footer
   before_filter :set_lang
 
@@ -58,7 +59,24 @@ class ApplicationController < ActionController::Base
   end
 
   def header_and_footer
-    @title = 'Labvirt'
-    @footer = 'Something nice should go down here...'
+    @title = _'Labvirt'
+    @footer = _'Something nice should go down here...'
+  end
+
+  def gen_menu
+    @menu = MenuTree.new
+
+    return unless @sysuser
+
+    ['laboratories', 'terminals'].each do |ctrl|
+      @menu << MenuItem.new(_(ctrl.camelcase), 
+                            url_for(:action => 'list', :controller => ctrl))
+    end
+
+    if @sysuser.admin?
+      @menu << MenuItem.new(_('User management'),
+                            url_for(:action => 'list', 
+                                    :controller => 'sysusers'))
+    end
   end
 end

@@ -10,7 +10,7 @@ class CreateTerminals < ActiveRecord::Migration
         '-a 16 -f -xl -r sound:local -r disk:usb=/media/usb ' <<
         '-r disk:cdrom=/media/cdrom -u %USER% -p %PASSWD% %HOST%'
       ],
-      [ 'VNC', '/usr/bin/vncviewer', '-PreferredEncoding hextile %HOST%']
+      [ 'VNC', '/usr/bin/vncviewer', '-PreferredEncoding hextile %HOST%:%PORT']
     ].each { |tc| TermClass.new(:name => tc[0], 
                                  :path => tc[1],
                                  :params => tc[2]).save! }
