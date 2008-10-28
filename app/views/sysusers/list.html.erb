@@ -1,0 +1,6 @@
+<h1><%= _"System users listing" %></h1>
+<% t = HtmlTable.new
+   t.head(_('ID'), _('Login'), _('Name'), _('Admin'), _('Action'))
+   @users.each { |u| t << row_for_listing(u) } %>
+<%= t.to_s %>
+<p><%= link_to _('Create a new user'), :action => 'new' %></p>
