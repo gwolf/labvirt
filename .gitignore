@@ -6,5 +6,5 @@ doc/api
 doc/app
 config/database.yml
 config/mongrel_cluster.yml
-locale/**/*.mo
+locale
 po/**/*.mo
