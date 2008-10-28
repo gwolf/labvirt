@@ -67,3 +67,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'pseudo_gettext'
+require 'menu_tree'
