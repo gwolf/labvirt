@@ -19,8 +19,8 @@ begin
 
   desc "Update pot/po files to match new version." 
   task :updatepo do
-    MY_APP_TEXT_DOMAIN = "comas" 
-    MY_APP_VERSION     = "comas 1.0" 
+    MY_APP_TEXT_DOMAIN = "labvirt" 
+    MY_APP_VERSION     = "labvirt 1.0" 
     GetText.update_pofiles(MY_APP_TEXT_DOMAIN,
                            Dir.glob("{app,lib}/**/*.{rb,erb,rhtml}"),
                            MY_APP_VERSION)

@@ -1,0 +1,287 @@
+#: app/models/term_class.rb:-
+msgid "term class"
+msgstr ""
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Name"
+msgstr ""
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Path"
+msgstr ""
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Params"
+msgstr ""
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Created at"
+msgstr ""
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Updated at"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "term param"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Name"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Value"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Terminal"
+msgstr ""
+
+#: app/models/net_iface.rb:-
+msgid "net iface"
+msgstr ""
+
+#: app/models/net_iface.rb:-
+msgid "NetIface|Name"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "laboratory"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Name"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Descr"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Mac base addr"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Instances"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Created at"
+msgstr ""
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Updated at"
+msgstr ""
+
+#: app/models/laboratory.rb:42
+msgid "Must be exclusively alphanumeric characters. Underscores are allowed"
+msgstr ""
+
+#: app/models/laboratory.rb:51
+msgid "Has to be a valid MAC address, with 00 as its last byte"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "sys conf"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Key"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Descr"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Value"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Created at"
+msgstr ""
+
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Updated at"
+msgstr ""
+
+#: app/models/disk_type.rb:-
+msgid "disk type"
+msgstr ""
+
+#: app/models/disk_type.rb:-
+msgid "DiskType|Name"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "disk dev"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Name"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Path"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Created at"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Updated at"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Disk type"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Media type"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Profile"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Position"
+msgstr ""
+
+#: app/models/media_type.rb:-
+msgid "media type"
+msgstr ""
+
+#: app/models/media_type.rb:-
+msgid "MediaType|Name"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "profile"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Name"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Descr"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Ram"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Extra params"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Maint mode"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Active"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Created at"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Updated at"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Net iface"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Laboratory"
+msgstr ""
+
+#: app/models/profile.rb:-
+msgid "Profile|Position"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "terminal"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Ipaddr"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Serveraddr"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Created at"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Updated at"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Term class"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "sysuser"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Name"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Login"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Passwd"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Pw salt"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Admin"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Created at"
+msgstr ""
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Updated at"
+msgstr ""
+
+#: app/controllers/terminal_controller.rb:11
+msgid "Unknown terminal %s"
+msgstr ""
+
+#: app/helpers/application_helper.rb:17
+msgid "Log out"
+msgstr ""
+
+#: app/views/login/login.html.erb:3
+msgid "User name"
+msgstr ""
+
+#: app/views/login/login.html.erb:5
+msgid "Password"
+msgstr ""
+
+#: app/views/login/login.html.erb:6
+msgid "Log in"
+msgstr ""
+
+#: app/views/laboratories/list.html.erb:1
+msgid "Laboratory list"
+msgstr ""
