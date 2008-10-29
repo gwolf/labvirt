@@ -1,49 +1,61 @@
-#: app/models/term_class.rb:-
-msgid "term class"
+#: app/helpers/terminals_helper.rb:4 app/helpers/sysusers_helper.rb:4
+msgid "ID"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Name"
+#: app/helpers/terminals_helper.rb:5
+msgid "IP address"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Path"
+#: app/helpers/terminals_helper.rb:6
+msgid "Server address"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Params"
+#: app/helpers/terminals_helper.rb:7
+msgid "Terminal class"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Created at"
+#: app/helpers/terminals_helper.rb:8 app/helpers/sysusers_helper.rb:4
+msgid "Action"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Updated at"
+#: app/helpers/terminals_helper.rb:15 app/helpers/sysusers_helper.rb:14
+msgid "Edit"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "term param"
+#: app/helpers/terminals_helper.rb:16 app/helpers/sysusers_helper.rb:15
+msgid "Delete"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Name"
+#: app/helpers/terminals_helper.rb:18 app/helpers/sysusers_helper.rb:18
+msgid "Are you sure you want to remove %s?"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Value"
+#: app/helpers/application_helper.rb:17
+msgid "Log out"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Terminal"
+#: app/helpers/application_helper.rb:59
+msgid "Field %s not defined for %s"
 msgstr ""
 
-#: app/models/net_iface.rb:-
-msgid "net iface"
+#: app/helpers/application_helper.rb:94 app/helpers/sysusers_helper.rb:13
+msgid "Yes"
 msgstr ""
 
-#: app/models/net_iface.rb:-
-msgid "NetIface|Name"
+#: app/helpers/application_helper.rb:94 app/helpers/sysusers_helper.rb:13
+msgid "No"
+msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Login"
+msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Name"
+msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Admin"
 msgstr ""
 
 #: app/models/laboratory.rb:-
@@ -106,58 +118,6 @@ msgstr ""
 msgid "SysConf|Updated at"
 msgstr ""
 
-#: app/models/disk_type.rb:-
-msgid "disk type"
-msgstr ""
-
-#: app/models/disk_type.rb:-
-msgid "DiskType|Name"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "disk dev"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Name"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Path"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Created at"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Updated at"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Disk type"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Media type"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Profile"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Position"
-msgstr ""
-
-#: app/models/media_type.rb:-
-msgid "media type"
-msgstr ""
-
-#: app/models/media_type.rb:-
-msgid "MediaType|Name"
-msgstr ""
-
 #: app/models/profile.rb:-
 msgid "profile"
 msgstr ""
@@ -206,28 +166,36 @@ msgstr ""
 msgid "Profile|Position"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "terminal"
+#: app/models/term_class.rb:-
+msgid "term class"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "Terminal|Ipaddr"
+#: app/models/term_class.rb:-
+msgid "TermClass|Name"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "Terminal|Serveraddr"
+#: app/models/term_class.rb:-
+msgid "TermClass|Path"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "Terminal|Created at"
+#: app/models/term_class.rb:-
+msgid "TermClass|Params"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "Terminal|Updated at"
+#: app/models/term_class.rb:-
+msgid "TermClass|Created at"
 msgstr ""
 
-#: app/models/terminal.rb:-
-msgid "Terminal|Term class"
+#: app/models/term_class.rb:-
+msgid "TermClass|Updated at"
+msgstr ""
+
+#: app/models/disk_type.rb:-
+msgid "disk type"
+msgstr ""
+
+#: app/models/disk_type.rb:-
+msgid "DiskType|Name"
 msgstr ""
 
 #: app/models/sysuser.rb:-
@@ -262,12 +230,186 @@ msgstr ""
 msgid "Sysuser|Updated at"
 msgstr ""
 
-#: app/controllers/terminal_controller.rb:11
+#: app/models/terminal.rb:-
+msgid "terminal"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Ipaddr"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Serveraddr"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Created at"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Updated at"
+msgstr ""
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Term class"
+msgstr ""
+
+#: app/models/net_iface.rb:-
+msgid "net iface"
+msgstr ""
+
+#: app/models/net_iface.rb:-
+msgid "NetIface|Name"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "term param"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Name"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Value"
+msgstr ""
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Terminal"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "disk dev"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Name"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Path"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Created at"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Updated at"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Disk type"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Media type"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Profile"
+msgstr ""
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Position"
+msgstr ""
+
+#: app/models/media_type.rb:-
+msgid "media type"
+msgstr ""
+
+#: app/models/media_type.rb:-
+msgid "MediaType|Name"
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:32
+msgid "The terminal settings have been successfully updated"
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:36
+msgid "Specified terminal does not exist"
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:40
+#: app/controllers/terminals_controller.rb:54
+#: app/controllers/sysusers_controller.rb:16
+msgid "Error saving requested data: "
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:52
+msgid "The terminal has been successfully created"
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:63
+msgid "The terminal has been successfully deleted"
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:65
+msgid "Could not delete requested terminal: "
+msgstr ""
+
+#: app/controllers/terminals_controller.rb:76
 msgid "Unknown terminal %s"
 msgstr ""
 
-#: app/helpers/application_helper.rb:17
-msgid "Log out"
+#: app/controllers/sysusers_controller.rb:14
+msgid "User data successfully updated"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:25
+msgid "The user was successfully deleted"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:27
+msgid "Could not destroy requested user: "
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:38
+msgid "The user was successfully created"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:40
+msgid "Error registering user: "
+msgstr ""
+
+#: app/controllers/application.rb:62
+msgid "Labvirt"
+msgstr ""
+
+#: app/controllers/application.rb:63
+msgid "Something nice should go down here..."
+msgstr ""
+
+#: app/controllers/application.rb:77
+msgid "User management"
+msgstr ""
+
+#: app/views/laboratories/list.html.erb:1
+msgid "Laboratory list"
+msgstr ""
+
+#: app/views/sysusers/edit.html.erb:1
+msgid "Edit system user %s"
+msgstr ""
+
+#: app/views/sysusers/edit.html.erb:4
+msgid "Save"
+msgstr ""
+
+#: app/views/sysusers/new.html.erb:1
+msgid "Create a new system user"
+msgstr ""
+
+#: app/views/sysusers/new.html.erb:4
+msgid "Create"
+msgstr ""
+
+#: app/views/sysusers/list.html.erb:1
+msgid "System users listing"
+msgstr ""
+
+#: app/views/sysusers/list.html.erb:3
+msgid "Create a new user"
 msgstr ""
 
 #: app/views/login/login.html.erb:3
@@ -282,6 +424,30 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: app/views/laboratories/list.html.erb:1
-msgid "Laboratory list"
+#: app/views/terminals/edit.html.erb:1
+msgid "Edit terminal data"
+msgstr ""
+
+#: app/views/terminals/edit.html.erb:4
+msgid "Save configuration"
+msgstr ""
+
+#: app/views/terminals/edit.html.erb:6
+msgid "Generated client command line"
+msgstr ""
+
+#: app/views/terminals/new.html.erb:1 app/views/terminals/list.html.erb:4
+msgid "Create a new terminal"
+msgstr ""
+
+#: app/views/terminals/new.html.erb:4
+msgid "Create terminal"
+msgstr ""
+
+#: app/views/terminals/list.html.erb:1
+msgid "Terminals listing"
+msgstr ""
+
+#: lib/menu_tree.rb:16
+msgid "Unexpected arguments received: "
 msgstr ""

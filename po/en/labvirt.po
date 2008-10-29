@@ -1,50 +1,80 @@
-#: app/models/term_class.rb:-
-msgid "term class"
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gunnar Wolf <gwolf@gwolf.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/helpers/terminals_helper.rb:4
+#: app/helpers/sysusers_helper.rb:4
+msgid "ID"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Name"
+#: app/helpers/terminals_helper.rb:5
+msgid "IP address"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Path"
+#: app/helpers/terminals_helper.rb:6
+msgid "Server address"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Params"
+#: app/helpers/terminals_helper.rb:7
+msgid "Terminal class"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Created at"
+#: app/helpers/terminals_helper.rb:8
+#: app/helpers/sysusers_helper.rb:4
+msgid "Action"
 msgstr ""
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Updated at"
+#: app/helpers/terminals_helper.rb:15
+#: app/helpers/sysusers_helper.rb:14
+msgid "Edit"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "term param"
+#: app/helpers/terminals_helper.rb:16
+#: app/helpers/sysusers_helper.rb:15
+msgid "Delete"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Name"
+#: app/helpers/terminals_helper.rb:18
+#: app/helpers/sysusers_helper.rb:18
+msgid "Are you sure you want to remove %s?"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Value"
+#: app/helpers/application_helper.rb:17
+msgid "Log out"
 msgstr ""
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Terminal"
+#: app/helpers/application_helper.rb:59
+msgid "Field %s not defined for %s"
 msgstr ""
 
-#: app/models/net_iface.rb:-
-msgid "net iface"
+#: app/helpers/application_helper.rb:94
+#: app/helpers/sysusers_helper.rb:13
+msgid "Yes"
 msgstr ""
 
-#: app/models/net_iface.rb:-
-msgid "NetIface|Name"
+#: app/helpers/application_helper.rb:94
+#: app/helpers/sysusers_helper.rb:13
+msgid "No"
 msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Login"
+msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Name"
+msgstr ""
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Admin"
+msgstr "Administrator"
 
 #: app/models/laboratory.rb:-
 msgid "laboratory"
@@ -52,27 +82,27 @@ msgstr ""
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Name"
-msgstr ""
+msgstr "Name"
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Descr"
-msgstr ""
+msgstr "Description"
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Mac base addr"
-msgstr ""
+msgstr "MAC base address"
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Instances"
-msgstr ""
+msgstr "Instances"
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Created at"
-msgstr ""
+msgstr "Created at"
 
 #: app/models/laboratory.rb:-
 msgid "Laboratory|Updated at"
-msgstr ""
+msgstr "Updated at"
 
 #: app/models/laboratory.rb:42
 msgid "Must be exclusively alphanumeric characters. Underscores are allowed"
@@ -84,79 +114,27 @@ msgstr ""
 
 #: app/models/sys_conf.rb:-
 msgid "sys conf"
-msgstr ""
+msgstr "system configuration"
 
 #: app/models/sys_conf.rb:-
 msgid "SysConf|Key"
-msgstr ""
+msgstr "Key"
 
 #: app/models/sys_conf.rb:-
 msgid "SysConf|Descr"
-msgstr ""
+msgstr "Description"
 
 #: app/models/sys_conf.rb:-
 msgid "SysConf|Value"
-msgstr ""
+msgstr "Value"
 
 #: app/models/sys_conf.rb:-
 msgid "SysConf|Created at"
-msgstr ""
+msgstr "Created at"
 
 #: app/models/sys_conf.rb:-
 msgid "SysConf|Updated at"
-msgstr ""
-
-#: app/models/disk_type.rb:-
-msgid "disk type"
-msgstr ""
-
-#: app/models/disk_type.rb:-
-msgid "DiskType|Name"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "disk dev"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Name"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Path"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Created at"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Updated at"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Disk type"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Media type"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Profile"
-msgstr ""
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Position"
-msgstr ""
-
-#: app/models/media_type.rb:-
-msgid "media type"
-msgstr ""
-
-#: app/models/media_type.rb:-
-msgid "MediaType|Name"
-msgstr ""
+msgstr "Updated at"
 
 #: app/models/profile.rb:-
 msgid "profile"
@@ -164,47 +142,111 @@ msgstr ""
 
 #: app/models/profile.rb:-
 msgid "Profile|Name"
-msgstr ""
+msgstr "Name"
 
 #: app/models/profile.rb:-
 msgid "Profile|Descr"
-msgstr ""
+msgstr "Description"
 
 #: app/models/profile.rb:-
 msgid "Profile|Ram"
-msgstr ""
+msgstr "RAM"
 
 #: app/models/profile.rb:-
 msgid "Profile|Extra params"
-msgstr ""
+msgstr "Extra parameters"
 
 #: app/models/profile.rb:-
 msgid "Profile|Maint mode"
-msgstr ""
+msgstr "Maintenance mode"
 
 #: app/models/profile.rb:-
 msgid "Profile|Active"
-msgstr ""
+msgstr "Active"
 
 #: app/models/profile.rb:-
 msgid "Profile|Created at"
-msgstr ""
+msgstr "Created at"
 
 #: app/models/profile.rb:-
 msgid "Profile|Updated at"
-msgstr ""
+msgstr "Updated at"
 
 #: app/models/profile.rb:-
 msgid "Profile|Net iface"
-msgstr ""
+msgstr "Network interface"
 
 #: app/models/profile.rb:-
 msgid "Profile|Laboratory"
-msgstr ""
+msgstr "Laboratory"
 
 #: app/models/profile.rb:-
 msgid "Profile|Position"
+msgstr "Position"
+
+#: app/models/term_class.rb:-
+msgid "term class"
+msgstr "terminal class"
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Name"
+msgstr "Name"
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Path"
+msgstr "Path"
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Params"
+msgstr "Parameters"
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Created at"
+msgstr "Created at"
+
+#: app/models/term_class.rb:-
+msgid "TermClass|Updated at"
+msgstr "Updated at"
+
+#: app/models/disk_type.rb:-
+msgid "disk type"
 msgstr ""
+
+#: app/models/disk_type.rb:-
+msgid "DiskType|Name"
+msgstr "Name"
+
+#: app/models/sysuser.rb:-
+msgid "sysuser"
+msgstr "system user"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Name"
+msgstr "name"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Login"
+msgstr "Login"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Passwd"
+msgstr "Password"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Pw salt"
+msgstr "Password salt"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Admin"
+msgstr "Administrator"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Created at"
+msgstr "Created at"
+
+#: app/models/sysuser.rb:-
+msgid "Sysuser|Updated at"
+msgstr "Updated at"
 
 #: app/models/terminal.rb:-
 msgid "terminal"
@@ -212,62 +254,180 @@ msgstr ""
 
 #: app/models/terminal.rb:-
 msgid "Terminal|Ipaddr"
-msgstr ""
+msgstr "IP address"
 
 #: app/models/terminal.rb:-
 msgid "Terminal|Serveraddr"
-msgstr ""
+msgstr "Server address"
 
 #: app/models/terminal.rb:-
 msgid "Terminal|Created at"
-msgstr ""
+msgstr "Created at"
 
 #: app/models/terminal.rb:-
 msgid "Terminal|Updated at"
-msgstr ""
+msgstr "Updated at"
 
 #: app/models/terminal.rb:-
 msgid "Terminal|Term class"
+msgstr "Terminal class"
+
+#: app/models/net_iface.rb:-
+msgid "net iface"
+msgstr "network interface"
+
+#: app/models/net_iface.rb:-
+msgid "NetIface|Name"
+msgstr "Name"
+
+#: app/models/term_param.rb:-
+msgid "term param"
+msgstr "Terminal parameters"
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Name"
+msgstr "Name"
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Value"
+msgstr "Value"
+
+#: app/models/term_param.rb:-
+msgid "TermParam|Terminal"
+msgstr "Terminal"
+
+#: app/models/disk_dev.rb:-
+msgid "disk dev"
+msgstr "disk device"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Name"
+msgstr "Name"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Path"
+msgstr "Path"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Created at"
+msgstr "Created at"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Updated at"
+msgstr "Updated at"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Disk type"
+msgstr "Disk type"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Media type"
+msgstr "Media type"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Profile"
+msgstr "Profile"
+
+#: app/models/disk_dev.rb:-
+msgid "DiskDev|Position"
+msgstr "Position"
+
+#: app/models/media_type.rb:-
+msgid "media type"
+msgstr "media type"
+
+#: app/models/media_type.rb:-
+msgid "MediaType|Name"
+msgstr "Name"
+
+#: app/controllers/terminals_controller.rb:32
+msgid "The terminal settings have been successfully updated"
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "sysuser"
+#: app/controllers/terminals_controller.rb:36
+msgid "Specified terminal does not exist"
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Name"
+#: app/controllers/terminals_controller.rb:40
+#: app/controllers/terminals_controller.rb:54
+#: app/controllers/sysusers_controller.rb:16
+msgid "Error saving requested data: "
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Login"
+#: app/controllers/terminals_controller.rb:52
+msgid "The terminal has been successfully created"
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Passwd"
+#: app/controllers/terminals_controller.rb:63
+msgid "The terminal has been successfully deleted"
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Pw salt"
+#: app/controllers/terminals_controller.rb:65
+msgid "Could not delete requested terminal: "
 msgstr ""
 
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Admin"
-msgstr ""
-
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Created at"
-msgstr ""
-
-#: app/models/sysuser.rb:-
-msgid "Sysuser|Updated at"
-msgstr ""
-
-#: app/controllers/terminal_controller.rb:11
+#: app/controllers/terminals_controller.rb:76
 msgid "Unknown terminal %s"
 msgstr ""
 
-#: app/helpers/application_helper.rb:17
-msgid "Log out"
+#: app/controllers/sysusers_controller.rb:14
+msgid "User data successfully updated"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:25
+msgid "The user was successfully deleted"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:27
+msgid "Could not destroy requested user: "
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:38
+msgid "The user was successfully created"
+msgstr ""
+
+#: app/controllers/sysusers_controller.rb:40
+msgid "Error registering user: "
+msgstr ""
+
+#: app/controllers/application.rb:62
+msgid "Labvirt"
+msgstr ""
+
+#: app/controllers/application.rb:63
+msgid "Something nice should go down here..."
+msgstr ""
+
+#: app/controllers/application.rb:77
+msgid "User management"
+msgstr ""
+
+#: app/views/laboratories/list.html.erb:1
+msgid "Laboratory list"
+msgstr ""
+
+#: app/views/sysusers/edit.html.erb:1
+msgid "Edit system user %s"
+msgstr ""
+
+#: app/views/sysusers/edit.html.erb:4
+msgid "Save"
+msgstr ""
+
+#: app/views/sysusers/new.html.erb:1
+msgid "Create a new system user"
+msgstr ""
+
+#: app/views/sysusers/new.html.erb:4
+msgid "Create"
+msgstr ""
+
+#: app/views/sysusers/list.html.erb:1
+msgid "System users listing"
+msgstr ""
+
+#: app/views/sysusers/list.html.erb:3
+msgid "Create a new user"
 msgstr ""
 
 #: app/views/login/login.html.erb:3
@@ -282,6 +442,32 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: app/views/laboratories/list.html.erb:1
-msgid "Laboratory list"
+#: app/views/terminals/edit.html.erb:1
+msgid "Edit terminal data"
 msgstr ""
+
+#: app/views/terminals/edit.html.erb:4
+msgid "Save configuration"
+msgstr ""
+
+#: app/views/terminals/edit.html.erb:6
+msgid "Generated client command line"
+msgstr ""
+
+#: app/views/terminals/new.html.erb:1
+#: app/views/terminals/list.html.erb:4
+msgid "Create a new terminal"
+msgstr ""
+
+#: app/views/terminals/new.html.erb:4
+msgid "Create terminal"
+msgstr ""
+
+#: app/views/terminals/list.html.erb:1
+msgid "Terminals listing"
+msgstr ""
+
+#: lib/menu_tree.rb:16
+msgid "Unexpected arguments received: "
+msgstr ""
+
