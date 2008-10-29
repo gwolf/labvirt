@@ -18,6 +18,15 @@ module ApplicationHelper
   end
 
   ############################################################
+  # Icons and similar stuff
+  def locale_links
+    available_locales.map { |loc|
+      '[%s]' % link_to_unless(normalized_locale == loc,
+                              loc, :lang => loc)
+    }.join(' ')
+  end
+
+  ############################################################
   # Form builders
   class LabvirtFormBuilder < ActionView::Helpers::FormBuilder
     include GetText
