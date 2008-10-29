@@ -1,0 +1,5 @@
+<% labvirt_form_for :terminal, terminal do |f| %>
+  <%= %w(id ipaddr serveraddr term_class_id).map { |fld| f.auto_field(fld) } %>
+  <%= terminal.term_params.map { |tp| "<b>#{tp.name}</b>: #{tp.value}<br/>"}%>
+  <%= f.submit label %>
+<% end %>

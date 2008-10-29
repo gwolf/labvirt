@@ -69,3 +69,4 @@ end
 require 'pseudo_gettext'
 require 'menu_tree'
 require 'html_table'
+require 'will_paginate'
