@@ -66,6 +66,13 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 end
 
+# Monkey-patching for GetText to work with Rails >= 2.1
+module ActionView
+  class Base
+    delegate :file_exists?, :to => :finder unless respond_to?(:file_exists?)
+  end
+end
+
 require 'pseudo_gettext'
 require 'menu_tree'
 require 'html_table'
