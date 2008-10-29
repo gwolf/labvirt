@@ -1,5 +1,12 @@
 module SysusersHelper
-  def row_for_listing(sysuser)
+  def sysusers_listing(users)
+    t = HtmlTable.new
+    t.head(_('ID'), _('Login'), _('Name'), _('Admin'), _('Action'))
+    users.each { |u| t << row_for_user_list(u) }
+    t.to_s
+  end
+
+  def row_for_user_list(sysuser)
     [ sysuser.id,
       sysuser.login,
       sysuser.name,
