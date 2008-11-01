@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def is_public_action?(ctrl, action)
-    public_actions = { :terminal => [:config],
+    public_actions = { :terminals => [:config],
       :login => [:login, :logout] }
 
     return true if public_actions.has_key?(ctrl) and
