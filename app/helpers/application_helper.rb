@@ -26,6 +26,14 @@ module ApplicationHelper
     }.join(' ')
   end
 
+  def edit_icon
+    _('Edit')
+  end
+
+  def delete_icon
+    _('Delete')
+  end
+
   ############################################################
   # Form builders
   class LabvirtFormBuilder < ActionView::Helpers::FormBuilder
