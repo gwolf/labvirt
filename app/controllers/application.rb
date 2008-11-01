@@ -3,7 +3,8 @@
 require 'pseudo_gettext'
 
 class ApplicationController < ActionController::Base
-  class AuthenticationRequired < Exception; end
+  class AuthenticationRequired < Exception #:nodoc:
+  end
   rescue_from AuthenticationRequired do |err|
     redirect_to :controller => 'login'
   end
@@ -26,6 +27,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :passwd
 
   protected
+  # Is the requested action public? (this means, can it be allowed
+  # with no user validation?)
   def is_public_action?(ctrl, action)
     public_actions = { :terminals => [:config],
       :login => [:login, :logout] }
@@ -34,6 +37,9 @@ class ApplicationController < ActionController::Base
       public_actions[ctrl].include? action
   end
 
+  # Validates we have a valid system user, and instantiates the
+  # @sysuser variable. Raises an AuthenticationRequired exception if
+  # no valid user is received and the requested action is not public.
   def ck_user
     ctrl = request.path_parameters['controller'].to_sym
     action = request.path_parameters['action'].to_sym
@@ -53,16 +59,19 @@ class ApplicationController < ActionController::Base
     return true
   end
 
+  # Specifies the GetText language environment
   def set_lang
     return true unless lang = params[:lang]
     cookies[:lang] = {:value => lang, :expires => Time.now+1.day, :path => '/'}
   end
 
+  # Sets header and footer variables
   def header_and_footer
     @title = _'Labvirt'
     @footer = _'Something nice should go down here...'
   end
 
+  # Generates the user menu tree
   def gen_menu
     @menu = MenuTree.new
 

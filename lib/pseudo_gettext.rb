@@ -16,7 +16,7 @@ rescue MissingSourceFile
 end
 
 unless defined? GetText
-  module GetText
+  module GetText #:nodoc:
     def _(str); str; end
     def s_(str); str; end
     def N_(str); str; end
@@ -25,22 +25,22 @@ unless defined? GetText
     def bindtextdomain(domain, opts = {}); end
     def textdomain(domain); end
   end
-  class ActiveRecord::Base
+  class ActiveRecord::Base #:nodoc:
     include GetText
     extend GetText
     def self.untranslate(*w);end
     def self.untranslate_all;end
   end
-  class ActionController::Base
+  class ActionController::Base #:nodoc:
     include GetText
     extend GetText
     def self.init_gettext(textdomain, opts = {}); end
   end
-  class ActionView::Base
+  class ActionView::Base # :nodoc:
     include GetText
     extend GetText
   end
-  class ::String
+  class ::String #:nodoc:
     alias :_old_format_m :%
     def %(args)
       if args.kind_of?(Hash)

@@ -1,5 +1,6 @@
 class TerminalsController < ApplicationController
-  class PerIPPermissionDenied < Exception; end
+  class PerIPPermissionDenied < Exception #:nodoc:
+  end
   rescue_from PerIPPermissionDenied do |err| 
     render :text => "ERROR: #{err}\n", :status => :forbidden
   end

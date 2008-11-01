@@ -54,6 +54,11 @@ class Terminal < ActiveRecord::Base
   #
   #   -u john -p pr1vat3 -h 127.0.0.1
   #
+  # Of course, this same result can be achieved if this terminal's
+  # #TermParams include similar entries for user and passwd, and the
+  # #serveraddr is 127.0.0.1, by just calling #client_params with no
+  # options.
+  #
   # Keep in mind that the specified options will overrule the
   # term_params, and term_params overrule serveraddr. That means, this
   # same result would be received if the terminal's serveraddr was
