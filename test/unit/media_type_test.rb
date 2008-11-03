@@ -1,8 +1,9 @@
 require 'test_helper'
+require 'catalog_test_helper'
 
 class MediaTypeTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  include CatalogTestHelper
+  def setup
+    @model = MediaType
   end
 end
