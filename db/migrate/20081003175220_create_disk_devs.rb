@@ -8,7 +8,7 @@ class CreateDiskDevs < ActiveRecord::Migration
 
     create_table :disk_devs do |t|
       t.string :name
-      t.string :path, :null => false
+      t.string :filename, :null => false
       t.timestamps
     end
     add_reference :disk_devs, :disk_types,  :null => false, :default => 1

@@ -22,20 +22,26 @@
 #
 # [kvm_bin] The filename (including full path) for kvm. Defaults to
 #           /usr/bin/kvm.
+#
+# [disk_dev_path] The directory where #DiskDev images will be
+#                 stored. Defaults to /var/lib/vhosts/
 class SysConf < ActiveRecord::Base
   validates_presence_of :key
   validates_uniqueness_of :key
 
   SysConfDefaults = { 'pid_dir' => '/var/run/labvirt',
-    'kvm_bin' => '/usr/bin/kvm'}
+    'kvm_bin' => '/usr/bin/kvm',
+    'disk_dev_path' => '/var/lib/vhosts/'
+  }
 
   # This is the preferred way to query for a configuration entry, as
   # it will take into account the default values. It hands back only
   # the string with the value (not the full #SysConf object). This
   # method is basically shorthand for #find_by_key(key).value
   def self.value_for(key)
-    item = self.find_by_key(key.to_s)
-    item.value if item
+    key = key.to_s
+    item = self.find_by_key(key) or return SysConfDefaults[key]
+    item.value
   end
 
   # Hands back an alphabetically sorted list of all of the defined

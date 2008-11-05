@@ -17,7 +17,7 @@ class CreateProfiles < ActiveRecord::Migration
     add_reference :profiles, :net_ifaces
 
     add_reference :disk_devs, :profiles
-    add_column :disk_devs, :position, :integer, :null => false, :default => 1
+    add_column :disk_devs, :position, :integer, :default => 1
 
     add_index :profiles, :name, :unique => true
     add_index :disk_devs, [:position, :profile_id], :unique => true

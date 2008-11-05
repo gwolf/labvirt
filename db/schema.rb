@@ -13,13 +13,13 @@ ActiveRecord::Schema.define(:version => 20081027221513) do
 
   create_table "disk_devs", :force => true do |t|
     t.string   "name"
-    t.string   "path",                         :null => false
+    t.string   "filename",                     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "disk_type_id",  :default => 1, :null => false
     t.integer  "media_type_id", :default => 1, :null => false
     t.integer  "profile_id"
-    t.integer  "position",      :default => 1, :null => false
+    t.integer  "position",      :default => 1
   end
 
   add_index "disk_devs", ["position", "profile_id"], :name => "index_disk_devs_on_position_and_profile_id", :unique => true
