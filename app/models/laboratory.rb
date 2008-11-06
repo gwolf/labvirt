@@ -50,4 +50,27 @@ class Laboratory < ActiveRecord::Base
   validates_format_of(:mac_base_addr, :with => /^([0-9a-f]{2}([:-])){5}00$/i,
                       :message => _('Has to be a valid MAC address, ' +
                                     'with 00 as its last byte'))
+
+  # Returns the list of profiles that can be currently used for this
+  # laboratory.
+  def active_profiles
+    profiles.select {|p| p.active?}
+  end
+
+  # Returns the list of currently active instances for this laboratory
+  def active_instances
+    Instance.running_for_laboratory(self)
+  end
+
+  # Returns the #Instance ID the next #Instance to be started should
+  # be assigned; returns nil if no further instances can be currently
+  # started for this #Laboratory
+  def next_instance_to_start
+    active = active_instances
+    return nil if active.size >= instances
+
+    # Assign the lowest available number
+    1.upto(instances) {|num| return num unless active.include?(num)}
+    nil
+  end
 end

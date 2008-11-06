@@ -41,6 +41,9 @@
 #                machine instantation
 
 class Profile < ActiveRecord::Base
+  class CannotStartInstance < Exception #:nodoc:
+  end
+
   has_many :disk_devs, :order => 'position'
   belongs_to :net_iface
   belongs_to :laboratory
@@ -51,21 +54,34 @@ class Profile < ActiveRecord::Base
 
   validates_presence_of :active
 
-  def running_instances
-  end
-
+  # Can a new #Instance be started on this #Profile?  That basically
+  # means: Is the current #Profile active? Is it not in maintenance
+  # mode? Does the #Laboratory to which it belongs allow for one more
+  # #Instance?
   def can_start_instance?
   end
 
+  # Starts a new instance of this #Profile. If no new instances can be
+  # started (see #can_start_instance), raises a CannotStartInstance
+  # exception.
   def start_instance
   end
 
+  # Stops the instance of this profile identified by the given ID
   def stop_instance(which)
   end
 
+  # Puts the current profile in maintenance mode - That means, shuts
+  # down all of its active virtual machines, and launches the
+  # maintenance instance.
+  # 
+  # If the maintenance instance cannot be started, raises a
+  # CannotStartInstance exception.
   def start_maintenance
   end
 
+  # Stops the maintenance instance. If it is not currently running,
+  # just returns false (just a NOOP, no exception raised).
   def stop_maintenance
   end
 end
