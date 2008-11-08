@@ -41,9 +41,6 @@
 #                machine instantation
 
 class Profile < ActiveRecord::Base
-  class CannotStartInstance < Exception #:nodoc:
-  end
-
   has_many :disk_devs, :order => 'position'
   belongs_to :net_iface
   belongs_to :laboratory
@@ -61,9 +58,7 @@ class Profile < ActiveRecord::Base
   def can_start_instance?
   end
 
-  # Starts a new instance of this #Profile. If no new instances can be
-  # started (see #can_start_instance), raises a CannotStartInstance
-  # exception.
+  # Starts a new instance of this #Profile. 
   def start_instance
   end
 
@@ -83,5 +78,18 @@ class Profile < ActiveRecord::Base
   # Stops the maintenance instance. If it is not currently running,
   # just returns false (just a NOOP, no exception raised).
   def stop_maintenance
+  end
+
+  def start_command
+    can_start_instance? or return nil
+    inst_num = laboratory.next_instance_to_start
+    dev_strings = disk_devs.map {|d| d.dev_string('snapshot=on') }
+    cmd = generic_start_command
+    #####
+  end
+
+  private
+  def generic_start_command
+    ##### /usr/bin/kvm -name lab01 -smp 1 -m 256 -vnc :01 -daemonize -localtime -usb -usbdevice tablet -net nic,macaddr=00:11:EC:00:00:01,model=virtio -net tap,ifname=tap_lab01,script=/etc/kvm/kvm-ifup -pidfile /var/run/kvm/lab01.pid -boot c -drive index=0,media=disk,if=ide,file=/var/lib/vhosts/wxp.disk.kvm.qcow2,snapshot=on
   end
 end

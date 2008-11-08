@@ -14,7 +14,8 @@
 # [descr] An optional long description (#descr) can be supplied as
 #         well, meant for humans to read
 #
-# [instances] The number of virtual machine instances to start by default
+# [instances] The maximum number of virtual machine instances to allow
+#             to be started in this laboratory
 #
 # [mac_base_addr] The starting physical network address - It must be a
 #                 valid MAC address in its usual representation - six
