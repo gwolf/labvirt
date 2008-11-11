@@ -4,7 +4,8 @@ class CreateLaboratories < ActiveRecord::Migration
       t.string  :name, :null => false
       t.text    :descr
       t.string  :mac_base_addr, :null => false
-      t.integer :instances, :default => 1, :null => false
+      t.integer :max_instances, :default => 1, :null => false
+      t.integer :start_instances, :default => 0, :null => false
 
       t.timestamps
     end

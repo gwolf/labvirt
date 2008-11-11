@@ -66,6 +66,12 @@ class Instance
     self.all_running[lab]    
   end
 
+  # Returns true if there is a running #Instance for this #Laboratory
+  # in maintenance mode (#num == 0)
+  def self.running_maint_for_laboratory?(lab)
+    ! self.running_for_laboratory(lab).select {|i| i.maint?}.empty?
+  end
+
   # Returns the list of #Instances currently running for a given
   # #Profile.
   def self.running_for_profile(prof)
@@ -73,15 +79,18 @@ class Instance
     # its ID
     prof = Profile.find(prof) if prof.is_a? Fixnum
 
-    self.running_for_laboratory[prof.laboratory].select {|i| i.profile == prof}
+    self.running_for_laboratory(prof.laboratory).select {|i| i.profile == prof}
   end
-  
 
   # Starts a new instance running with the given profile. Returns the
   # instance object.
-  def self.start(profile)
-    cmd = profile.start_command
-    #####
+
+  def self.start(prof)
+    # Accept being called either with an instantiated profile or with
+    # its ID
+    prof = Profile.find(prof) if prof.is_a? Fixnum
+    cmd = prof.start_command
+    system(cmd)
   end
   
   # Initializing an #Instance means verifying the PID file it
@@ -145,6 +154,16 @@ class Instance
     false
   end
 
+  # Returns true if this #Instance is in maintenance mode - That is,
+  # if its #num is 0. Keep in mind that only a single #Profile for
+  # each #Laboratory can be running in maintenance mode at a given
+  # time.
+  def maint?
+    ck_valid
+    return true if @num.to_i == 0
+    false
+  end
+
   # Removes the process' PIDfile
   def clean_files
     ck_valid
@@ -188,7 +207,7 @@ class Instance
   # state
   def base_info_file
     ck_valid
-    File.join(SysConf.value_for(:pid_dir), '%s_%d' % @laboratory.nme, @num)
+    File.join(SysConf.value_for(:pid_dir), '%s_%d' % @laboratory.name, @num)
   end
   
   # If an #Instance is not valid, this method will raise an

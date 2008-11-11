@@ -32,10 +32,11 @@ ActiveRecord::Schema.define(:version => 20081027221513) do
   add_index "disk_types", ["name"], :name => "index_disk_types_on_name", :unique => true
 
   create_table "laboratories", :force => true do |t|
-    t.string   "name",                         :null => false
+    t.string   "name",                           :null => false
     t.text     "descr"
-    t.string   "mac_base_addr",                :null => false
-    t.integer  "instances",     :default => 1, :null => false
+    t.string   "mac_base_addr",                  :null => false
+    t.integer  "max_instances",   :default => 1, :null => false
+    t.integer  "start_instances", :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

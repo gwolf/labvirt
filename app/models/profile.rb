@@ -24,11 +24,17 @@
 #
 # [maint_mode] Whether a given profile is considered to be in
 #              _maintenance_ mode. This should signal the #Laboratory
-#              not to start the virtual hosts in their regular
-#              fashion, with many computer instances and each of their
-#              respective #DiskDev images mounted in _snapshot_ mode,
-#              but to start only a single instance in regular
-#              read/write mode.
+#              not to start the virtual hosts for this #Profile in
+#              their regular fashion, with many VM #Instances and each
+#              of their respective #DiskDev images mounted in
+#              _snapshot_ mode, but to start only a single #Instance
+#              in regular read/write mode. Of course, other #Profiles
+#              can be used normally for this same #Laboratory.
+#              
+#              While many #Profiles can be set to maintenance mode,
+#              only one of them can be running for a given
+#              #Laboratory; every other #Profile marked as in
+#              maintenance will be kept inactive.
 #
 # [active] Whether a given profile should be marked as
 #          _active_. Inactive profiles will not be booted.
@@ -52,44 +58,96 @@ class Profile < ActiveRecord::Base
   validates_presence_of :active
 
   # Can a new #Instance be started on this #Profile?  That basically
-  # means: Is the current #Profile active? Is it not in maintenance
-  # mode? Does the #Laboratory to which it belongs allow for one more
-  # #Instance?
+  # means: 
+  # 
+  # - If the current #Profile is in maintenance mode, no other VM
+  #   #Instance is running on it, and no other #Profile of the same
+  #   #Laboratory is  running in maintenance mode
+  #
+  # - Otherwise, is the current #Profile active? Does
+  #   the #Laboratory to which it belongs allow for one more
+  #   #Instance?
   def can_start_instance?
+    if maint_mode?
+      return false unless Instance.running_for_profile(self).empty? or
+        Instance.running_maint_for_laboratory?(laboratory)
+    else
+      return false if !active? or 
+        laboratory.max_instances <= laboratory.active_instances.size
+    end
+    true
   end
 
   # Starts a new instance of this #Profile. 
   def start_instance
+    Instance.start(self)
   end
 
-  # Stops the instance of this profile identified by the given ID
+  # Stops the #instance of this profile identified by the given
+  # #Instance number
   def stop_instance(which)
+    inst = Instance.running_for_profile(self).select {|i| i.num == which}
+    return nil if inst.empty?
+    inst.first.stop
   end
 
   # Puts the current profile in maintenance mode - That means, shuts
   # down all of its active virtual machines, and launches the
   # maintenance instance.
-  # 
-  # If the maintenance instance cannot be started, raises a
-  # CannotStartInstance exception.
+  #
+  # Note that this method induces a two second delay, so the running
+  # instances have time to be removed and start_instance does not
+  # fail.
+  #
+  # If this #Profile was already in maintenance mode, no action is
+  # performed.
   def start_maintenance
+    return true if maint_mode?
+
+    Instance.running_for_profile(self).map {|i| i.stop}
+    maint_mode = true
+    self.save!
+    sleep 2
+
+    self.start_instance
   end
 
-  # Stops the maintenance instance. If it is not currently running,
-  # just returns false (just a NOOP, no exception raised).
+  # Stops the maintenance instance, and sets the current profile as
+  # for regular use. If there is a running maintenance instance, stop
+  # it as well. Unlike what happens in #start_maintenance, this method
+  # will _not_ start any virtual machines, it will only _allow_ them
+  # to be started in the regular ways.
+  # 
+  # Note that, as any #DiskDevs for this #Instance are mounted RW, it
+  # is much recommended to properly shut down its operating system
+  # from the virtual machine itself.
+  #
+  # If this #Profile was not in maintenance mode, no action is
+  # performed.
   def stop_maintenance
+    return true unless maint_mode?
+
+    Instance.running_for_profile(self).map {|i| i.stop}
+    maint_mode = false
+    self.save!
   end
 
+  # Builds the command line to start a new #Instance of this
+  # #Profile. Returns nil if this instance cannot be currently
+  # started.
   def start_command
     can_start_instance? or return nil
-    inst_num = laboratory.next_instance_to_start
-    dev_strings = disk_devs.map {|d| d.dev_string('snapshot=on') }
-    cmd = generic_start_command
-    #####
-  end
 
-  private
-  def generic_start_command
-    ##### /usr/bin/kvm -name lab01 -smp 1 -m 256 -vnc :01 -daemonize -localtime -usb -usbdevice tablet -net nic,macaddr=00:11:EC:00:00:01,model=virtio -net tap,ifname=tap_lab01,script=/etc/kvm/kvm-ifup -pidfile /var/run/kvm/lab01.pid -boot c -drive index=0,media=disk,if=ide,file=/var/lib/vhosts/wxp.disk.kvm.qcow2,snapshot=on
+    kvm = SysConf.value_for('kvm_bin')
+    inst_num = maint_mode? ? 0 : laboratory.next_instance_to_start
+    inst_name = sprintf '%s_%02d' % [laboratory.name, inst_num]
+    mac = laboratory.mac_for_instance(inst_num)
+    disks = disk_devs.map {|d| d.dev_string }.join(' ')
+    pidfile = File.join(SysConf.value_for(:pid_dir),"#{inst_name}.pid")
+
+    "#{kvm} -name #{inst_name} -m #{ram} -daemonize -localtime -usb " +
+      "-usbdevice tablet -net nic,macaddr=#{mac},model=#{net_iface.name} " +
+      "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup " +
+      "-pidfile #{pidfile} -boot c #{disks}"
   end
 end
