@@ -22,7 +22,7 @@ begin
     MY_APP_TEXT_DOMAIN = "labvirt" 
     MY_APP_VERSION     = "labvirt 1.0" 
     GetText.update_pofiles(MY_APP_TEXT_DOMAIN,
-                           Dir.glob("{app,lib}/**/*.{rb,erb,rhtml}"),
+                           Dir.glob("{app,lib,term_support}/**/*.{rb,erb,rhtml}"),
                            MY_APP_VERSION)
   end
 rescue LoadError => err

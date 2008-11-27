@@ -65,7 +65,7 @@ class Terminal < ActiveRecord::Base
   # 127.0.0.1 and it had 'user' => 'john' and 'passwd' => 'pr1vat3' as
   # its term_params.
   def client_params(options={})
-    cmd = term_class.params
+    cmd = term_class.params || ''
 
     params = { 'HOST' => serveraddr }
     term_params.each {|tp| params[tp.name.to_s.upcase] = tp.value}
