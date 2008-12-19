@@ -26,6 +26,9 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   filter_parameter_logging :passwd
 
+  # All of our controllers should redirect to 'list' by default, unless overriden
+  def index; redirect_to :action => 'list'; end
+
   protected
   # Is the requested action public? (this means, can it be allowed
   # with no user validation?)
@@ -77,10 +80,16 @@ class ApplicationController < ActionController::Base
 
     return unless @sysuser
 
-    ['laboratories', 'terminals'].each do |ctrl|
-      @menu << MenuItem.new(_(ctrl.camelcase), 
-                            url_for(:action => 'list', :controller => ctrl))
-    end
+    @menu << MenuItem.new(_('Laboratories'),
+                          url_for(:controller => 'laboratories')) <<
+      MenuItem.new(_('Profiles'),
+                   url_for(:controller => 'profiles')) <<
+      MenuItem.new(_('Disk devices'),
+                   url_for(:controller => 'disk_devs')) <<
+      MenuItem.new(_('Terminals'),
+                   url_for(:controller => 'terminals')) <<
+      MenuItem.new(_('Instances'),
+                   url_for(:controller => 'instances')) 
 
     if @sysuser.admin?
       @menu << MenuItem.new(_('User management'),
