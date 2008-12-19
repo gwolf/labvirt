@@ -1,0 +1,6 @@
+- labvirt_form_for :terminal, terminal do |f|
+  = %w(id ipaddr serveraddr term_class_id).map { |fld| f.auto_field(fld) }
+  %h3= _'Terminal parameters'
+  #term-params
+    = params_for_terminal(terminal)
+  = f.submit label

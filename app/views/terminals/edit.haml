@@ -1,0 +1,5 @@
+%h1= _'Edit terminal data'
+= render :partial => 'terminal_data', :locals => {:terminal => @terminal, :label => _('Save configuration')}
+%h3= _'Generated client command line'
+%pre
+  =@terminal.client_command_line

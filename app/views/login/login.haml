@@ -1,0 +1,12 @@
+#loginreq
+  - form_tag url_for(:action => 'login'), :id=>'login' do
+    %p
+      = _'User name: '
+      %input{ :name => "login", :size => "20", :type => "text" }
+    %p
+      = _'Password: '
+      %input{ :name => "passwd", :size => "20", :type => "password" }
+    %p
+      %input{ :name => "ok", :value => _('Log in'), :type => "submit" }
+%script{ :language => "JavaScript" }
+  document.getElementById("login").elements[0].focus()

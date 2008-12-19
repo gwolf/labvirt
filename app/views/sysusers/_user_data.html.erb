@@ -1,4 +1,0 @@
-<% labvirt_form_for :sysuser, user do |f| %>
-  <%= %w(id login name passwd admin).map {|fld| f.auto_field(fld) } %>
-  <%= f.submit submit %>
-<% end %>

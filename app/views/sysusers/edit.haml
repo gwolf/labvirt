@@ -1,0 +1,3 @@
+%h1
+  = _('Edit system user %s') % @user.id
+= render :partial => 'user_data', :locals => {:user => @user, :submit => _('Save')}

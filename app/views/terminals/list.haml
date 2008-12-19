@@ -1,0 +1,6 @@
+%h1
+  = _'Terminals listing'
+= will_paginate(@terminals)
+= terminals_listing(@terminals)
+%p
+  = link_to _('Create a new terminal'), :action => 'new'
