@@ -1,0 +1,17 @@
+%h1= @labels[:list_title]
+%table
+  %tr.table-head
+    - @fields[:list].each do |fld|
+      %td= @sortable.has_key?(fld) ? link_to(fld, :sort_by => fld) : fld
+    %td
+  - rows = 0
+  - @items.each do |item|
+    %tr
+      - @fields[:list].each do |fld|
+        %td= item.send(fld)
+      %td
+        = edit_link_for item
+        = delete_link_for item
+%p
+  = link_to @labels[:new_title], :action => 'new'
+

@@ -1,0 +1,6 @@
+%h1= @pg_title
+- labvirt_form_for :item, @item do |f|
+  - @fields[:edit].each do |fld|
+    = f.auto_field fld
+  = f.submit
+
