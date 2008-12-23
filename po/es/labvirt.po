@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: labvirt 1.0\n"
-"POT-Creation-Date: 2008-10-29 14:09-0600\n"
+"POT-Creation-Date: 2008-12-22 22:30-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gunnar Wolf <gwolf@gwolf.org>\n"
 "Language-Team: \n"
@@ -9,119 +9,171 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/models/term_class.rb:-
-msgid "term class"
-msgstr "clase de terminal"
+#: app/controllers/generic_component_controller.rb:40
+msgid "The specified settings were successfully updated"
+msgstr "Los datos especificados han sido actualizados exitosamente"
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Name"
-msgstr "Nombre"
+#: app/controllers/generic_component_controller.rb:45
+msgid "Specified item does not exist"
+msgstr "El elemento especificada no existe"
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Path"
-msgstr "Ruta"
+#: app/controllers/generic_component_controller.rb:48
+#: app/controllers/sysusers_controller.rb:16
+#: app/controllers/terminals_controller.rb:45
+msgid "Error saving requested data: "
+msgstr "Error grabando los datos solicitados: "
 
-#: app/models/term_class.rb:-
-#, fuzzy
-msgid "TermClass|Params"
-msgstr "Parámetros"
+#: app/controllers/generic_component_controller.rb:58
+msgid "The terminal has been successfully deleted"
+msgstr "La terminal fue eliminada exitosamente"
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Created at"
-msgstr "Fecha de creación"
+#: app/controllers/generic_component_controller.rb:60
+msgid "Could not delete requested terminal: "
+msgstr "No fue posible eliminar la terminal solicitada:"
 
-#: app/models/term_class.rb:-
-msgid "TermClass|Updated at"
-msgstr "Última actualización"
+#: app/controllers/generic_component_controller.rb:67
+msgid "This controller should not be directly invoked"
+msgstr "Este controlador no debe ser invocado directamente"
 
-#: app/models/term_param.rb:-
-msgid "term param"
-msgstr "parámetros de terminal"
+#: app/controllers/login_controller.rb:8
+msgid "Successfully logged in"
+msgstr "Se ha registrado exitosamente en el sistema"
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Name"
-msgstr "Nombre"
+#: app/controllers/login_controller.rb:12
+msgid "Login failure"
+msgstr "Error entrando al sistema"
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Value"
-msgstr "Valor"
+#: app/controllers/laboratories_controller.rb:7
+msgid "The laboratory was successfully created"
+msgstr "El laboratorio fue creado exitosamente"
 
-#: app/models/term_param.rb:-
-msgid "TermParam|Terminal"
-msgstr "Terminal"
+#: app/controllers/laboratories_controller.rb:8
+msgid "Error registering laboratory"
+msgstr "Error registrando laboratorio"
 
-#: app/models/net_iface.rb:-
-msgid "net iface"
-msgstr "interfaz de red"
+#: app/controllers/laboratories_controller.rb:9
+msgid "Laboratory list"
+msgstr "Lista de laboratorios"
 
-#: app/models/net_iface.rb:-
-msgid "NetIface|Name"
-msgstr "Nombre"
+#: app/controllers/laboratories_controller.rb:10
+msgid "Define a new laboratory"
+msgstr "Definir un nuevo laboratorio"
 
-#: app/models/laboratory.rb:-
-msgid "laboratory"
-msgstr "laboratorio"
+#: app/controllers/laboratories_controller.rb:11
+msgid "Edit laboratory"
+msgstr "Editar laboratorio"
 
-#: app/models/laboratory.rb:-
-msgid "Laboratory|Name"
-msgstr "Nombre"
+#: app/controllers/profiles_controller.rb:7
+msgid "The profile was successfully created"
+msgstr "El perfil fue creado exitosamente"
 
-#: app/models/laboratory.rb:-
-#, fuzzy
-msgid "Laboratory|Descr"
-msgstr "Descripción"
+#: app/controllers/profiles_controller.rb:8
+msgid "Error registering profile"
+msgstr "Error registrando al perfil"
 
-#: app/models/laboratory.rb:-
-#, fuzzy
-msgid "Laboratory|Mac base addr"
-msgstr "Dirección MAC base"
+#: app/controllers/profiles_controller.rb:9
+msgid "Profile list"
+msgstr "Lista de perfiles"
 
-#: app/models/laboratory.rb:-
-msgid "Laboratory|Instances"
+#: app/controllers/profiles_controller.rb:10
+msgid "Define a new profile"
+msgstr "Definir un nuevo perfil"
+
+#: app/controllers/profiles_controller.rb:11
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: app/controllers/sysusers_controller.rb:14
+msgid "User data successfully updated"
+msgstr "Los datos del usuario fueron actualizados exitosamente"
+
+#: app/controllers/sysusers_controller.rb:25
+msgid "The user was successfully deleted"
+msgstr "El usuario fue eliminado exitosamente"
+
+#: app/controllers/sysusers_controller.rb:27
+msgid "Could not destroy requested user: "
+msgstr "No fue posible eliminar el usuario especificado:"
+
+#: app/controllers/sysusers_controller.rb:38
+msgid "The user was successfully created"
+msgstr "El usuario fue creado exitosamente"
+
+#: app/controllers/sysusers_controller.rb:40
+msgid "Error registering user: "
+msgstr "Error registrando al usuario: "
+
+#: app/controllers/terminals_controller.rb:5
+msgid "ERROR: %s\n"
+msgstr "ERROR: %s\n"
+
+#: app/controllers/terminals_controller.rb:37
+msgid "Unknown terminal %s"
+msgstr "Terminal desconocida %s"
+
+#: app/controllers/terminals_controller.rb:44
+msgid "The terminal has been successfully created"
+msgstr "La terminal fue creada exitosamente"
+
+#: app/controllers/terminals_controller.rb:46
+msgid "Terminals listing"
+msgstr "Listado de terminales"
+
+#: app/controllers/terminals_controller.rb:47
+msgid "Define a new terminal"
+msgstr "Definir una nueva terminal"
+
+#: app/controllers/application.rb:73
+msgid "Labvirt"
+msgstr "Labvirt"
+
+#: app/controllers/application.rb:74
+msgid "Something nice should go down here..."
+msgstr "Algo interesante podría ir aquí..."
+
+#: app/controllers/application.rb:83
+msgid "Laboratories"
+msgstr "Laboratorios"
+
+#: app/controllers/application.rb:85
+msgid "Profiles"
+msgstr "perfiles"
+
+#: app/controllers/application.rb:87
+msgid "Disk devices"
+msgstr "Dispositivos de disco"
+
+#: app/controllers/application.rb:89
+msgid "Terminals"
+msgstr "Terminales"
+
+#: app/controllers/application.rb:91
+msgid "Instances"
 msgstr "Instancias"
 
-#: app/models/laboratory.rb:-
-msgid "Laboratory|Created at"
-msgstr "Fecha de creación"
+#: app/controllers/application.rb:95
+msgid "User management"
+msgstr "Administración de usuarios"
 
-#: app/models/laboratory.rb:-
-msgid "Laboratory|Updated at"
-msgstr "Última actualización"
+#: app/controllers/disk_devs_controller.rb:7
+msgid "The device was successfully created"
+msgstr "El dispositivo fue creado exitosamente"
 
-#: app/models/laboratory.rb:42
-msgid "Must be exclusively alphanumeric characters. Underscores are allowed"
-msgstr ""
-"Debe consistir exclusivamente de caracteres alfanuméricos. Los guiones bajos "
-"están permitidos."
+#: app/controllers/disk_devs_controller.rb:8
+msgid "Error registering device"
+msgstr "Error registrando al dispositivo"
 
-#: app/models/laboratory.rb:51
-msgid "Has to be a valid MAC address, with 00 as its last byte"
-msgstr "Debe ser una dirección MAC válida, con 00 como su último byte"
+#: app/controllers/disk_devs_controller.rb:9
+msgid "Disk device list"
+msgstr "Lista de dispositivos de disco"
 
-#: app/models/sys_conf.rb:-
-msgid "sys conf"
-msgstr "configuración"
+#: app/controllers/disk_devs_controller.rb:10
+msgid "Define a new disk device"
+msgstr "Definir un nuevo dispositivo de disco"
 
-#: app/models/sys_conf.rb:-
-msgid "SysConf|Key"
-msgstr "Llave"
-
-#: app/models/sys_conf.rb:-
-#, fuzzy
-msgid "SysConf|Descr"
-msgstr "Descripción"
-
-#: app/models/sys_conf.rb:-
-msgid "SysConf|Value"
-msgstr "Valor"
-
-#: app/models/sys_conf.rb:-
-msgid "SysConf|Created at"
-msgstr "Fecha de creación"
-
-#: app/models/sys_conf.rb:-
-msgid "SysConf|Updated at"
-msgstr "Última actualización"
+#: app/controllers/disk_devs_controller.rb:11
+msgid "Edit disk device"
+msgstr "Editar dispositivo de disco"
 
 #: app/models/disk_type.rb:-
 msgid "disk type"
@@ -129,6 +181,94 @@ msgstr "tipo de disco"
 
 #: app/models/disk_type.rb:-
 msgid "DiskType|Name"
+msgstr "Nombre"
+
+#: app/models/profile.rb:-
+msgid "profile"
+msgstr "perfil"
+
+#: app/models/profile.rb:-
+msgid "Profile|Name"
+msgstr "Nombre"
+
+#: app/models/profile.rb:-
+msgid "Profile|Descr"
+msgstr "Descripción"
+
+#: app/models/profile.rb:-
+msgid "Profile|Ram"
+msgstr "Nombre"
+
+#: app/models/profile.rb:-
+msgid "Profile|Extra params"
+msgstr "Parámetros extra"
+
+#: app/models/profile.rb:-
+msgid "Profile|Maint mode"
+msgstr "Modo de mantenimiento"
+
+#: app/models/profile.rb:-
+msgid "Profile|Active"
+msgstr "Activo"
+
+#: app/models/profile.rb:-
+msgid "Profile|Created at"
+msgstr "Fecha de creación"
+
+#: app/models/profile.rb:-
+msgid "Profile|Updated at"
+msgstr "Última actualización"
+
+#: app/models/profile.rb:-
+msgid "Profile|Net iface"
+msgstr "Interfaz de red"
+
+#: app/models/profile.rb:-
+msgid "Profile|Laboratory"
+msgstr "Laboratorio"
+
+#: app/models/profile.rb:-
+msgid "Profile|Position"
+msgstr "Posición"
+
+#: app/models/instance.rb:182
+msgid "Instance %s for %s is not running or did not register its PID "
+msgstr "La instancia %s para %s no está corriendo o no registró su PID"
+
+#: app/models/instance.rb:218
+msgid "This instance is no longer valid"
+msgstr "Esta instancia ya no es válida"
+
+#: app/models/terminal.rb:-
+msgid "terminal"
+msgstr "terminal"
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Ipaddr"
+msgstr "Dirección IP"
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Serveraddr"
+msgstr "Dirección del servidor"
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Created at"
+msgstr "Fecha de creación"
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Updated at"
+msgstr "Última actualización"
+
+#: app/models/terminal.rb:-
+msgid "Terminal|Term class"
+msgstr "Clase de terminal"
+
+#: app/models/net_iface.rb:-
+msgid "net iface"
+msgstr "interfaz de red"
+
+#: app/models/net_iface.rb:-
+msgid "NetIface|Name"
 msgstr "Nombre"
 
 #: app/models/disk_dev.rb:-
@@ -140,8 +280,8 @@ msgid "DiskDev|Name"
 msgstr "Nombre"
 
 #: app/models/disk_dev.rb:-
-msgid "DiskDev|Path"
-msgstr "Ruta"
+msgid "DiskDev|Filename"
+msgstr "Nombre de archivo"
 
 #: app/models/disk_dev.rb:-
 msgid "DiskDev|Created at"
@@ -167,121 +307,53 @@ msgstr "Perfil"
 msgid "DiskDev|Position"
 msgstr "Posición"
 
-#: app/models/media_type.rb:-
-msgid "media type"
-msgstr "tipo de medio"
+#: app/models/term_class.rb:-
+msgid "term class"
+msgstr "clase de terminal"
 
-#: app/models/media_type.rb:-
-msgid "MediaType|Name"
+#: app/models/term_class.rb:-
+msgid "TermClass|Name"
 msgstr "Nombre"
 
-#: app/models/profile.rb:-
-msgid "profile"
-msgstr "perfil"
+#: app/models/term_class.rb:-
+msgid "TermClass|Path"
+msgstr "Ruta"
 
-#: app/models/profile.rb:-
-msgid "Profile|Name"
-msgstr "Nombre"
+#: app/models/term_class.rb:-
+msgid "TermClass|Params"
+msgstr "Parámetros"
 
-#: app/models/profile.rb:-
-#, fuzzy
-msgid "Profile|Descr"
-msgstr "Descripción"
-
-#: app/models/profile.rb:-
-#, fuzzy
-msgid "Profile|Ram"
-msgstr "Nombre"
-
-#: app/models/profile.rb:-
-#, fuzzy
-msgid "Profile|Extra params"
-msgstr "Parámetros extra"
-
-#: app/models/profile.rb:-
-#, fuzzy
-msgid "Profile|Maint mode"
-msgstr "Modo de mantenimiento"
-
-#: app/models/profile.rb:-
-msgid "Profile|Active"
-msgstr "Activo"
-
-#: app/models/profile.rb:-
-msgid "Profile|Created at"
+#: app/models/term_class.rb:-
+msgid "TermClass|Created at"
 msgstr "Fecha de creación"
 
-#: app/models/profile.rb:-
-msgid "Profile|Updated at"
+#: app/models/term_class.rb:-
+msgid "TermClass|Updated at"
 msgstr "Última actualización"
-
-#: app/models/profile.rb:-
-#, fuzzy
-msgid "Profile|Net iface"
-msgstr "Interfaz de red"
-
-#: app/models/profile.rb:-
-msgid "Profile|Laboratory"
-msgstr "Laboratorio"
-
-#: app/models/profile.rb:-
-msgid "Profile|Position"
-msgstr "Posición"
-
-#: app/models/terminal.rb:-
-msgid "terminal"
-msgstr "terminal"
-
-#: app/models/terminal.rb:-
-#, fuzzy
-msgid "Terminal|Ipaddr"
-msgstr "Dirección IP"
-
-#: app/models/terminal.rb:-
-#, fuzzy
-msgid "Terminal|Serveraddr"
-msgstr "Dirección del servidor"
-
-#: app/models/terminal.rb:-
-msgid "Terminal|Created at"
-msgstr "Fecha de creación"
-
-#: app/models/terminal.rb:-
-msgid "Terminal|Updated at"
-msgstr "Última actualización"
-
-#: app/models/terminal.rb:-
-#, fuzzy
-msgid "Terminal|Term class"
-msgstr "Clase de terminal"
 
 #: app/models/sysuser.rb:-
 msgid "sysuser"
 msgstr "usuario de sistema"
 
 #: app/models/sysuser.rb:-
-#, fuzzy
 msgid "Sysuser|Name"
-msgstr "nombre"
+msgstr "Nombre"
 
 #: app/models/sysuser.rb:-
 msgid "Sysuser|Login"
 msgstr "Login"
 
 #: app/models/sysuser.rb:-
-#, fuzzy
 msgid "Sysuser|Passwd"
 msgstr "Contraseña"
 
 #: app/models/sysuser.rb:-
-#, fuzzy
 msgid "Sysuser|Pw salt"
 msgstr "Salt de la contraseña"
 
 #: app/models/sysuser.rb:-
-#, fuzzy
 msgid "Sysuser|Admin"
-msgstr "Login"
+msgstr "Admin"
 
 #: app/models/sysuser.rb:-
 msgid "Sysuser|Created at"
@@ -291,72 +363,153 @@ msgstr "Fecha de creación"
 msgid "Sysuser|Updated at"
 msgstr "Última actualización"
 
-#: app/controllers/terminals_controller.rb:32
-msgid "The terminal settings have been successfully updated"
-msgstr "Los datos de la terminal han sido actualizados exitosamente"
+#: app/models/media_type.rb:-
+msgid "media type"
+msgstr "tipo de medio"
 
-#: app/controllers/terminals_controller.rb:36
-msgid "Specified terminal does not exist"
-msgstr "La terminal especificada no existe"
+#: app/models/media_type.rb:-
+msgid "MediaType|Name"
+msgstr "Nombre"
 
-#: app/controllers/terminals_controller.rb:40
-#: app/controllers/terminals_controller.rb:54
-#: app/controllers/sysusers_controller.rb:16
-msgid "Error saving requested data: "
-msgstr "Error grabando los datos solicitados: "
+#: app/models/sys_conf.rb:-
+msgid "sys conf"
+msgstr "configuración"
 
-#: app/controllers/terminals_controller.rb:52
-msgid "The terminal has been successfully created"
-msgstr "La terminal fue creada exitosamente"
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Key"
+msgstr "Llave"
 
-#: app/controllers/terminals_controller.rb:63
-msgid "The terminal has been successfully deleted"
-msgstr "La terminal fue eliminada exitosamente"
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Descr"
+msgstr "Descripción"
 
-#: app/controllers/terminals_controller.rb:65
-msgid "Could not delete requested terminal: "
-msgstr "No fue posible eliminar la terminal solicitada:"
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Value"
+msgstr "Valor"
 
-#: app/controllers/terminals_controller.rb:76
-msgid "Unknown terminal %s"
-msgstr "Terminal desconocida %s"
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Created at"
+msgstr "Fecha de creación"
 
-#: app/controllers/application.rb:62
-msgid "Labvirt"
-msgstr "Labvirt"
+#: app/models/sys_conf.rb:-
+msgid "SysConf|Updated at"
+msgstr "Última actualización"
 
-#: app/controllers/application.rb:63
-msgid "Something nice should go down here..."
-msgstr "Algo interesante podría ir aquí..."
+#: app/models/term_param.rb:-
+msgid "term param"
+msgstr "parámetros de terminal"
 
-#: app/controllers/application.rb:77
-msgid "User management"
-msgstr "Administración de usuarios"
+#: app/models/term_param.rb:-
+msgid "TermParam|Name"
+msgstr "Nombre"
 
-#: app/controllers/sysusers_controller.rb:14
-msgid "User data successfully updated"
-msgstr "Los datos del usuario fueron actualizados exitosamente"
+#: app/models/term_param.rb:-
+msgid "TermParam|Value"
+msgstr "Valor"
 
-#: app/controllers/sysusers_controller.rb:25
-msgid "The user was successfully deleted"
-msgstr "El usuario fue eliminado exitosamente"
+#: app/models/term_param.rb:-
+msgid "TermParam|Terminal"
+msgstr "Terminal"
 
-#: app/controllers/sysusers_controller.rb:27
-msgid "Could not destroy requested user: "
-msgstr "No fue posible eliminar el usuario especificado:"
+#: app/models/laboratory.rb:-
+msgid "laboratory"
+msgstr "laboratorio"
 
-#: app/controllers/sysusers_controller.rb:38
-msgid "The user was successfully created"
-msgstr "El usuario fue creado exitosamente"
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Name"
+msgstr "Nombre"
 
-#: app/controllers/sysusers_controller.rb:40
-msgid "Error registering user: "
-msgstr "Error registrando al usuario: "
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Descr"
+msgstr "Descripción"
 
-#: app/helpers/terminals_helper.rb:4 app/helpers/sysusers_helper.rb:4
-#: app/helpers/laboratories_helper.rb:4
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Mac base addr"
+msgstr "Dirección MAC base"
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Max instances"
+msgstr "Instancias máximas"
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Start instances"
+msgstr "Instancias a iniciar"
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Created at"
+msgstr "Fecha de creación"
+
+#: app/models/laboratory.rb:-
+msgid "Laboratory|Updated at"
+msgstr "Última actualización"
+
+#: app/models/laboratory.rb:52
+msgid "Must be exclusively alphanumeric characters. Underscores are allowed"
+msgstr "Debe consistir exclusivamente de caracteres alfanuméricos. Los guiones bajos están permitidos."
+
+#: app/models/laboratory.rb:63
+msgid "Has to be a valid MAC address, with 00 as its last byte"
+msgstr "Debe ser una dirección MAC válida, con 00 como su último byte"
+
+#: app/models/laboratory.rb:96
+msgid "Laboratory %s (%d) has reached its maximum number of instances (%d)"
+msgstr "El laboratorio %s (%d) alcanzó su número máximo de instancias (%d)"
+
+#: app/models/laboratory.rb:103
+msgid "Cannot assign a new instance number"
+msgstr "No es posible asignar un nuevo número de instancia"
+
+#: app/models/laboratory.rb:109
+msgid "Argument must be an integer between 0 and 255"
+msgstr "Este argumento debe ser un núnmero entero entre 0 y 255"
+
+#: app/helpers/sysusers_helper.rb:4
+#: app/helpers/terminals_helper.rb:4
 msgid "ID"
 msgstr "ID"
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Login"
+msgstr "Login"
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Name"
+msgstr "Nombre"
+
+#: app/helpers/sysusers_helper.rb:4
+msgid "Admin"
+msgstr "Admin"
+
+#: app/helpers/sysusers_helper.rb:4
+#: app/helpers/terminals_helper.rb:8
+msgid "Action"
+msgstr "Acción"
+
+#: app/helpers/sysusers_helper.rb:13
+#: app/helpers/application_helper.rb:111
+msgid "Yes"
+msgstr "Sí"
+
+#: app/helpers/sysusers_helper.rb:13
+#: app/helpers/application_helper.rb:111
+msgid "No"
+msgstr "No"
+
+#: app/helpers/sysusers_helper.rb:14
+#: app/helpers/application_helper.rb:30
+msgid "Edit"
+msgstr "Editar"
+
+#: app/helpers/sysusers_helper.rb:15
+#: app/helpers/application_helper.rb:34
+msgid "Delete"
+msgstr "Eliminar"
+
+#: app/helpers/sysusers_helper.rb:18
+#: app/helpers/terminals_helper.rb:18
+#: app/helpers/generic_component_helper.rb:6
+msgid "Are you sure you want to remove %s?"
+msgstr "Está seguro de que desea eliminar %s?"
 
 #: app/helpers/terminals_helper.rb:5
 msgid "IP address"
@@ -370,140 +523,26 @@ msgstr "Dirección del servidor"
 msgid "Terminal class"
 msgstr "Clase de terminal"
 
-#: app/helpers/terminals_helper.rb:8 app/helpers/sysusers_helper.rb:4
-#: app/helpers/laboratories_helper.rb:9
-msgid "Action"
-msgstr "Acción"
+#: app/helpers/terminals_helper.rb:24
+msgid "Please save the terminal before specifying any parameters"
+msgstr "Por favor grabe los datos de la terminal antes de especificar sus parámetros extra"
 
-#: app/helpers/terminals_helper.rb:15 app/helpers/sysusers_helper.rb:14
-#: app/helpers/laboratories_helper.rb:17
-msgid "Edit"
-msgstr "Editar"
+#: app/helpers/terminals_helper.rb:36
+msgid "Leave any terminal parameter blank to delete it; create a new one by specifying its name as well."
+msgstr "Deje un parámetro en blanco para eliminarlo; puede crear uno nuevo especificando su nombre."
 
-#: app/helpers/terminals_helper.rb:16 app/helpers/sysusers_helper.rb:15
-#: app/helpers/laboratories_helper.rb:18
-msgid "Delete"
-msgstr "Eliminar"
-
-#: app/helpers/terminals_helper.rb:18 app/helpers/sysusers_helper.rb:18
-#: app/helpers/laboratories_helper.rb:20
-msgid "Are you sure you want to remove %s?"
-msgstr "Está seguro de que desea eliminar %s?"
+#: app/helpers/generic_component_helper.rb:3
+msgid "this item"
+msgstr "este elemento"
 
 #: app/helpers/application_helper.rb:17
 msgid "Log out"
 msgstr "Salir"
 
-#: app/helpers/application_helper.rb:68
+#: app/helpers/application_helper.rb:76
 msgid "Field %s not defined for %s"
 msgstr "El campo %s no está definido para %s"
 
-#: app/helpers/application_helper.rb:103 app/helpers/sysusers_helper.rb:13
-msgid "Yes"
-msgstr "Sí"
-
-#: app/helpers/application_helper.rb:103 app/helpers/sysusers_helper.rb:13
-msgid "No"
-msgstr "No"
-
-#: app/helpers/sysusers_helper.rb:4
-msgid "Login"
-msgstr "Login"
-
-#: app/helpers/sysusers_helper.rb:4 app/helpers/laboratories_helper.rb:5
-msgid "Name"
-msgstr "Nombre"
-
-#: app/helpers/sysusers_helper.rb:4
-msgid "Admin"
-msgstr "Admin"
-
-#: app/helpers/laboratories_helper.rb:6
-msgid "MAC base address"
-msgstr "Dirección MAC base"
-
-#: app/helpers/laboratories_helper.rb:7
-msgid "Instances"
-msgstr "Instancias"
-
-#: app/helpers/laboratories_helper.rb:8
-msgid "Profiles"
-msgstr "perfiles"
-
-#: app/views/terminals/new.html.erb:1 app/views/terminals/list.html.erb:4
-msgid "Create a new terminal"
-msgstr "Crear una nueva terminal"
-
-#: app/views/terminals/new.html.erb:4
-msgid "Create terminal"
-msgstr "Crear terminal"
-
-#: app/views/terminals/edit.html.erb:1
-msgid "Edit terminal data"
-msgstr "Editar datos de terminal"
-
-#: app/views/terminals/edit.html.erb:4
-msgid "Save configuration"
-msgstr "Grabar configuración"
-
-#: app/views/terminals/edit.html.erb:6
-msgid "Generated client command line"
-msgstr "Línea de comando generada para el cliente"
-
-#: app/views/terminals/list.html.erb:1
-msgid "Terminals listing"
-msgstr "Listado de terminales"
-
-#: app/views/sysusers/new.html.erb:1
-msgid "Create a new system user"
-msgstr "Crear un nuevo usuario de sistema"
-
-#: app/views/sysusers/new.html.erb:4
-msgid "Create"
-msgstr "Crear"
-
-#: app/views/sysusers/edit.html.erb:1
-msgid "Edit system user %s"
-msgstr "Editar al usuario de sistema %s"
-
-#: app/views/sysusers/edit.html.erb:4
-msgid "Save"
-msgstr "Grabar"
-
-#: app/views/sysusers/list.html.erb:1
-msgid "System users listing"
-msgstr "Listado de usuarios de sistema"
-
-#: app/views/sysusers/list.html.erb:3
-msgid "Create a new user"
-msgstr "Crear un nuevo usuario"
-
-#: app/views/login/login.html.erb:3
-msgid "User name"
-msgstr "Nombre de usuario"
-
-#: app/views/login/login.html.erb:5
-msgid "Password"
-msgstr "Contraseña"
-
-#: app/views/login/login.html.erb:6
-msgid "Log in"
-msgstr "Entrar"
-
-#: app/views/laboratories/list.html.erb:1
-msgid "Laboratory list"
-msgstr "Lista de laboratorios"
-
-#: app/views/laboratories/list.html.erb:4
-msgid "Create a new laboratory"
-msgstr "Crear un nuevo laboratorio"
-
-#: lib/menu_tree.rb:16
+#: lib/menu_tree.rb:25
 msgid "Unexpected arguments received: "
 msgstr "Argumentos inesperados: "
-
-#~ msgid "Profile|RAM"
-#~ msgstr "Memoria"
-
-#~ msgid "Sysuser|Administrator"
-#~ msgstr "Administrador"
