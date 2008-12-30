@@ -1,3 +1,18 @@
+# #LaboratoriesController, #TerminalsController, #ProfilesController,
+# #DiskDevsController (and potentially others) are very similar - so,
+# for DRYness sake, abstract them all into this generic controller.
+#
+# This controller provides the basic, traditional CRUD actions (#list,
+# #new, #edit, #delete). No #show is provided (as #edit is
+# enough). Besides said actions, the #GenericComponentHelper provides
+# hooks from which any class inheriting from this one can add elements
+# to given views. Those hooks will be triggered if a partial with a
+# suitable name is found - i.e. for adding information at the end of a
+# #TerminalsController' edit/new form, you can just drop a
+# _form_end.haml file in app/views/terminals. The provided hooks are
+# 
+#  * In #list: before_list, after_list
+#  * In #edit: before_form, after_form, form_begin, form_end
 class GenericComponentController < ApplicationController
   before_filter :setup_ctrl
 
@@ -10,12 +25,13 @@ class GenericComponentController < ApplicationController
     @items = @model.paginate(:order => @sortable[session[@model_name]], 
                              :include => @list_include,
                              :page => params[:page])
+    render :action => 'generic/list'
   end
 
   def new
     @item = @model.new
     @pg_title = @labels[:new_title]
-    render :action => 'edit'
+    render :action => 'generic/edit'
     return true unless request.post?
     begin
       @item.update_attributes!(params[:item])
@@ -31,13 +47,15 @@ class GenericComponentController < ApplicationController
     begin
       @item = @model.find(params[:id])
       @pg_title = @labels[:edit_title]
-      return true unless request.post?
 
-      @item.transaction do
-        @item.update_attributes(params[:item])
+      if request.post?
+        @item.transaction do
+          @item.update_attributes!(params[:item])
 
-        flash[:notice] = _'The specified settings were successfully updated'
-        redirect_to :action => 'list'
+          flash[:notice] = _'The specified settings were successfully updated'
+          redirect_to :action => 'list'
+          return true
+        end
       end
 
     rescue ActiveRecord::RecordNotFound
@@ -48,6 +66,7 @@ class GenericComponentController < ApplicationController
       flash[:error] = _('Error saving requested data: ') +
         err.record.errors.full_messages.join('<br/>')
     end
+    render :action => 'generic/edit'
   end
 
   def delete

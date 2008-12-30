@@ -73,7 +73,9 @@ class Terminal < ActiveRecord::Base
 
     params.keys.each do |k|
       tmpl = "%#{k.to_s.upcase}%"
-      cmd.gsub! /#{tmpl}/, params[k]
+      # Elements are explicitly converted into strings - You will get
+      # exceptions otherwise
+      cmd.gsub! /#{tmpl}/, params[k].to_s
     end
     cmd
   end

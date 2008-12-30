@@ -14,7 +14,7 @@ class ProfilesController < GenericComponentController
       :edit => %w(name descr laboratory_id position ram extra_params active 
                   maint_mode net_iface_id)}
     @sortable = {'id' => 'profiles.id', 'name' => 'name',
-      'laboratory' => 'laboratories.id'}
+      'laboratory' => 'laboratories.name'}
     @list_include = 'laboratory'
   end
 end

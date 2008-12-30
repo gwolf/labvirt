@@ -1,0 +1,7 @@
+- if @item.new_record?
+  %p
+    = _('To set the extra client parameters, or to see the generated client command line, save terminal first.')
+- else
+  = render :partial => 'extra_params'
+  %h3= _('Generated client command line')
+  %pre= @item.client_command_line

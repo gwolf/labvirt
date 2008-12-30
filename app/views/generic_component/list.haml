@@ -1,17 +1,20 @@
 %h1= @labels[:list_title]
+= before_list
+
+= will_paginate @items
 %table
   %tr.table-head
-    - @fields[:list].each do |fld|
-      %td= @sortable.has_key?(fld) ? link_to(fld, :sort_by => fld) : fld
-    %td
+    = list_head
+    %th 
   - rows = 0
   - @items.each do |item|
-    %tr
-      - @fields[:list].each do |fld|
-        %td= item.send(fld)
+    %tr{:class => ((rows+=1) % 2) == 0 ?        |
+                   'table-even' : 'table-odd'}  |
+      = list_row(item)
       %td
         = edit_link_for item
         = delete_link_for item
 %p
   = link_to @labels[:new_title], :action => 'new'
 
+= after_list

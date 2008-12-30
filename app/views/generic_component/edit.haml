@@ -1,6 +1,12 @@
 %h1= @pg_title
+= before_form
+
 - labvirt_form_for :item, @item do |f|
+  = form_begin
   - @fields[:edit].each do |fld|
+    - next if fld == 'id' and @item.new_record?
     = f.auto_field fld
+  = form_end
   = f.submit
 
+= after_form
