@@ -1,6 +1,8 @@
 %h1= @pg_title
 = before_form
 
+= link_to _('Back to listing'), :action => 'list'
+
 - labvirt_form_for :item, @item do |f|
   = form_begin
   - @fields[:edit].each do |fld|

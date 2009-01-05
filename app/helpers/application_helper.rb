@@ -100,7 +100,7 @@ module ApplicationHelper
         return text_field(field, options) 
 
       when :text
-        options[:size] ||= '70x15'
+        options[:size] ||= '70x4'
         return text_area(field, options) 
 
       when :integer, :decimal, :float

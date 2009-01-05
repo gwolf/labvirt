@@ -15,6 +15,6 @@ class DiskDevsController < GenericComponentController
                   position)}
     @sortable = {'id' => 'disk_devs.id', 'name' => 'disk_devs.name', 
     'profile' => 'profiles.id', 'filename' => 'filename'}
-    @list_include = 'profiles, media_types, disk_types'
+    @list_include = [:profile, :media_type, :disk_type]
   end
 end

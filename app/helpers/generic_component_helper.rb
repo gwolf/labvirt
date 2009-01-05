@@ -17,17 +17,52 @@ module GenericComponentHelper
   end
 
   def list_row(item)
-    @fields[:list].map { |fld| "<td>#{item.send(fld)}</td>" }.join "\n"
+    @fields[:list].map do |fld|
+      value = item.send(fld)
+      case fld
+      when 'laboratory'
+        link_to_laboratory(value)
+      when 'profile'
+        link_to_profile(value)
+      when 'media_type'
+        link_to_media_type(value)
+      when 'disk_type'
+        link_to_disk_type(value)
+      when 'term_class'
+        link_to_term_class(value)
+      else
+        value
+      end
+    end.map {|col| "<td>#{col}</td>"}.join("\n")
+  end
+
+  %w(laboratory profile disk_type media_type term_class).each do |dest|
+    eval <<-END_SRC
+      def link_to_#{dest}(item)
+        link_to(item.name, :controller => '#{dest.pluralize}',
+                :action => 'edit', :id => item.id)
+      end
+    END_SRC
   end
 
   # Optional partials that can be called from the relevant actions
   # (see #GenericComponentController for further details)
   %w(before_list after_list before_form form_begin form_end
-     after_form).each do |part|
+     after_form list_head_extra_col).each do |part|
     eval <<-END_SRC
       def #{part}
         begin
           render :partial => '#{part}'
+        rescue ActionView::MissingTemplate
+        end
+      end
+    END_SRC
+  end
+  %w(list_extra_col).each do |part|
+    eval <<-END_SRC
+      def #{part}(item)
+        begin
+          render :partial => '#{part}', :locals => {:item => item}
         rescue ActionView::MissingTemplate
         end
       end

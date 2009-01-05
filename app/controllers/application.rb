@@ -88,6 +88,8 @@ class ApplicationController < ActionController::Base
                    url_for(:controller => 'disk_devs')) <<
       MenuItem.new(_('Terminals'),
                    url_for(:controller => 'terminals')) <<
+      MenuItem.new(_('Terminal classes'),
+                   url_for(:controller => 'term_classes')) <<
       MenuItem.new(_('Instances'),
                    url_for(:controller => 'instances')) 
 

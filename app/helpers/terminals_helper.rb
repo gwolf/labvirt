@@ -37,4 +37,3 @@ module TerminalsHelper
              'new one by specifying its name as well.') << t.to_s
   end
 end
-#  <%= terminal.term_params.map { |tp| "<b>#{tp.name}</b>: #{tp.value}<br/>"}%>

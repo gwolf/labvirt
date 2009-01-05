@@ -36,12 +36,12 @@ class Terminal < ActiveRecord::Base
     "#{term_class.path} #{client_params(options)}"
   end
 
-  # Builds the client parameters, based on serveraddr (which will
-  # replace %HOST%), term_params (replacing their corresponding
-  # uppercase key) and the received options. Each of the options is
-  # replaced where its corresponding template appears on the
-  # #TermClass.params definition. As an example, if #TermClass.params
-  # is:
+  # Builds the parameters for the client command line, substituting
+  # where pertinent the values from #client_param_hash.
+  #
+  # Each of the options is replaced where its corresponding template
+  # appears on the #TermClass.params definition. As an example, if
+  # #TermClass.params is:
   #
   #   -u %USER% -p %PASSWD% -h %HOST%
   #
@@ -53,23 +53,9 @@ class Terminal < ActiveRecord::Base
   # the result will be:
   #
   #   -u john -p pr1vat3 -h 127.0.0.1
-  #
-  # Of course, this same result can be achieved if this terminal's
-  # #TermParams include similar entries for user and passwd, and the
-  # #serveraddr is 127.0.0.1, by just calling #client_params with no
-  # options.
-  #
-  # Keep in mind that the specified options will overrule the
-  # term_params, and term_params overrule serveraddr. That means, this
-  # same result would be received if the terminal's serveraddr was
-  # 127.0.0.1 and it had 'user' => 'john' and 'passwd' => 'pr1vat3' as
-  # its term_params.
   def client_params(options={})
+    params = client_param_hash(options)
     cmd = term_class.params || ''
-
-    params = { 'HOST' => serveraddr }
-    term_params.each {|tp| params[tp.name.to_s.upcase] = tp.value}
-    params.merge!(options)
 
     params.keys.each do |k|
       tmpl = "%#{k.to_s.upcase}%"
@@ -79,4 +65,54 @@ class Terminal < ActiveRecord::Base
     end
     cmd
   end
+
+  # Builds the substitution hash from the terminal's #serveraddr (as
+  # HOST), term_params (replacing their corresponding uppercase key)
+  # and the options received when calling this method. As an example,
+  # if this terminal's #serveraddr is '127.0.0.1' and the two
+  # following #TermParams are specified:
+  #
+  #   {:name => 'user', :value => 'foo'}
+  #   {:name => 'passwd', :value => 'pr1vat3'}
+  #
+  # calling #client_param_hash with no options will return:
+  #
+  #   term.client_param_hash
+  #   => { 'USER' => 'foo', 'PASSWD => 'pr1vat3', 'HOST' => '127.0.0.1' }
+  # 
+  # Any options specified when calling this method will be added, or
+  # will override the value. On the same #Terminal,
+  #
+  #   term.client_param_hash(:host => 'some.where.org')
+  #   => { 'USER' => 'foo', 'PASSWD => 'pr1vat3', 'HOST' => 'some.where.org' }
+  def client_param_hash(options={})
+    params = { 'HOST' => serveraddr }
+    term_params.each {|tp| params[tp.name.to_s.upcase] = tp.value}
+    options.keys.each do |opt|
+      params[opt.to_s.upcase] = options[opt] 
+    end
+
+    params
+  end
+
+  # Returns the #TermParam this terminal has defined for the given
+  # name. Returns nil if no matching #TermParam exists
+  def term_param(name)
+    term_params.select {|t| t.name == name}[0]
+  end
+
+  # Gets the list of parameters needed by this terminal's current
+  # #TermClass - This means, all the parameters specified in the
+  # #TermClass' #params
+  def needed_params
+    param_str = String.new(term_class.params)
+    res = []
+    while param_str.sub! /%([^%\s]+)%/, '' do
+      res << $1
+    end
+    res.sort
+  end
+
+  def missing_params; needed_params - client_param_hash.keys; end
+  def params_complete?; missing_params.empty?; end
 end

@@ -1,23 +1,13 @@
-/ Contents of this helper are currently b0rken
-/
-  %h3= _('Extra client parameters')
+%h3= _('Client parameters')
+- if ! @item.params_complete?
   %p
-    = _('You can set here any extra parameters to be specified to the client.')
-    = _("Extra parameters can be defined using this terminal class' <tt>extra_params</tt> parameter.")
-    %br
-  %p= _('To delete any existing parameter, just set its value empty.')
-  %table
-    %tr.table-head
-      %th= _('Name')
-      %th= _('Value')
-    - rows = 0
-    - @item.term_params.each do |tp|
-      %tr{:class => ((rows+=1) % 2) == 0 ?       |
-                     'table-even' : 'table-odd'} |
-        %td= tp.name
-        %td= text_field_tag "value_#{tp.id}", tp.value
-    %tr{:class => ((rows+=1) % 2) == 0 ?       |
-                   'table-even' : 'table-odd'} |
-      %td= text_field_tag "name_new", nil, :size => 8
-      %td= text_field_tag "value_new", nil
-
+    = _('This terminal is <b>not</b> ready to be used.')
+    = _('The following parameters are missing: %s') % @item.missing_params.join(', ')
+%p= _('The following parameters are defined:')
+%ul
+  - params = @item.client_param_hash
+  - params.keys.sort.each do |par|
+    %li
+      %b= par
+      = params[par]
+%p= link_to _('Edit parameters'), :action => 'edit_params'

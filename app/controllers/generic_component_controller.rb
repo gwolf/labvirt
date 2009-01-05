@@ -11,8 +11,14 @@
 # #TerminalsController' edit/new form, you can just drop a
 # _form_end.haml file in app/views/terminals. The provided hooks are
 # 
-#  * In #list: before_list, after_list
-#  * In #edit: before_form, after_form, form_begin, form_end
+#  * In #list: before_list, after_list, list_head_extra_col,
+#    list_extra_col 
+#  * In #edit: before_form, after_form, form_begin,
+#    form_end
+#
+# The list_extra_col hook in #list has a local 'item' variable
+# available, containing the item for the current row. All the other
+# partials have no special variables set.
 class GenericComponentController < ApplicationController
   before_filter :setup_ctrl
 

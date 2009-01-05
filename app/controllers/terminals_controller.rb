@@ -5,6 +5,26 @@ class TerminalsController < GenericComponentController
     render :text => _('ERROR: %s\n') % err, :status => :forbidden
   end
 
+
+  def set_term_param
+    begin
+      term = Terminal.find(params[:id])
+      tp = term.term_param(params[:name]) || 
+        TermParam.new(:terminal => term, :name => params[:name])
+      tp.value = params[:value]
+      tp.save!
+      render_text tp.value
+    rescue ActiveRecord::RecordNotFound
+      # This is called via AJAX - no real way to easily notify about
+      # the problem when saving. So, in case of errors... just send
+      # some asterisks? (check on this back later)
+      render_text '****'
+    end
+  end
+
+  def delete_term_param
+    raise Exception, params.to_yaml
+  end
 ###### AGREGAR A EDICIÓN
 #         # This is suboptimal; however, I expect terminal editions to
 #         # be infrequent enough for this not to be an issue. In any

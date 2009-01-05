@@ -55,7 +55,8 @@ class Profile < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  validates_presence_of :active
+  validates_inclusion_of :active, :in => [true, false]
+  validates_inclusion_of :maint_mode, :in => [true, false]
 
   # Can a new #Instance be started on this #Profile?  That basically
   # means: 

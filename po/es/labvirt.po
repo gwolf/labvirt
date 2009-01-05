@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: labvirt 1.0\n"
-"POT-Creation-Date: 2008-12-22 22:30-0600\n"
+"POT-Creation-Date: 2009-01-05 08:01-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Gunnar Wolf <gwolf@gwolf.org>\n"
 "Language-Team: \n"
@@ -9,31 +9,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/controllers/generic_component_controller.rb:40
+#: app/controllers/generic_component_controller.rb:62
 msgid "The specified settings were successfully updated"
 msgstr "Los datos especificados han sido actualizados exitosamente"
 
-#: app/controllers/generic_component_controller.rb:45
+#: app/controllers/generic_component_controller.rb:69
 msgid "Specified item does not exist"
 msgstr "El elemento especificada no existe"
 
-#: app/controllers/generic_component_controller.rb:48
+#: app/controllers/generic_component_controller.rb:72
+#: app/controllers/term_classes_controller.rb:6
 #: app/controllers/sysusers_controller.rb:16
-#: app/controllers/terminals_controller.rb:45
+#: app/controllers/terminals_controller.rb:65
 msgid "Error saving requested data: "
 msgstr "Error grabando los datos solicitados: "
 
-#: app/controllers/generic_component_controller.rb:58
+#: app/controllers/generic_component_controller.rb:83
 msgid "The terminal has been successfully deleted"
 msgstr "La terminal fue eliminada exitosamente"
 
-#: app/controllers/generic_component_controller.rb:60
+#: app/controllers/generic_component_controller.rb:85
 msgid "Could not delete requested terminal: "
 msgstr "No fue posible eliminar la terminal solicitada:"
 
-#: app/controllers/generic_component_controller.rb:67
+#: app/controllers/generic_component_controller.rb:92
 msgid "This controller should not be directly invoked"
 msgstr "Este controlador no debe ser invocado directamente"
+
+#: app/controllers/term_classes_controller.rb:4
+msgid "The terminal class has been successfully created"
+msgstr "La clase de terminales fue creada exitosamente"
+
+#: app/controllers/term_classes_controller.rb:7
+msgid "Terminal classes listing"
+msgstr "Listado de clases de terminales"
+
+#: app/controllers/term_classes_controller.rb:8
+msgid "Define new terminal class"
+msgstr "Definir una nueva clase de terminales"
 
 #: app/controllers/login_controller.rb:8
 msgid "Successfully logged in"
@@ -107,19 +120,19 @@ msgstr "Error registrando al usuario: "
 msgid "ERROR: %s\n"
 msgstr "ERROR: %s\n"
 
-#: app/controllers/terminals_controller.rb:37
+#: app/controllers/terminals_controller.rb:57
 msgid "Unknown terminal %s"
 msgstr "Terminal desconocida %s"
 
-#: app/controllers/terminals_controller.rb:44
+#: app/controllers/terminals_controller.rb:64
 msgid "The terminal has been successfully created"
 msgstr "La terminal fue creada exitosamente"
 
-#: app/controllers/terminals_controller.rb:46
+#: app/controllers/terminals_controller.rb:66
 msgid "Terminals listing"
 msgstr "Listado de terminales"
 
-#: app/controllers/terminals_controller.rb:47
+#: app/controllers/terminals_controller.rb:67
 msgid "Define a new terminal"
 msgstr "Definir una nueva terminal"
 
@@ -137,7 +150,7 @@ msgstr "Laboratorios"
 
 #: app/controllers/application.rb:85
 msgid "Profiles"
-msgstr "perfiles"
+msgstr "Perfiles"
 
 #: app/controllers/application.rb:87
 msgid "Disk devices"
@@ -148,10 +161,14 @@ msgid "Terminals"
 msgstr "Terminales"
 
 #: app/controllers/application.rb:91
+msgid "Terminal classes"
+msgstr "Clases de terminal"
+
+#: app/controllers/application.rb:93
 msgid "Instances"
 msgstr "Instancias"
 
-#: app/controllers/application.rb:95
+#: app/controllers/application.rb:97
 msgid "User management"
 msgstr "Administración de usuarios"
 
@@ -192,19 +209,19 @@ msgid "Profile|Name"
 msgstr "Nombre"
 
 #: app/models/profile.rb:-
-msgid "Profile|Descr"
+msgid "Profile|Description"
 msgstr "Descripción"
 
 #: app/models/profile.rb:-
-msgid "Profile|Ram"
-msgstr "Nombre"
+msgid "Profile|RAM"
+msgstr "RAM"
 
 #: app/models/profile.rb:-
-msgid "Profile|Extra params"
+msgid "Profile|Extra parameters"
 msgstr "Parámetros extra"
 
 #: app/models/profile.rb:-
-msgid "Profile|Maint mode"
+msgid "Profile|Maintenance mode"
 msgstr "Modo de mantenimiento"
 
 #: app/models/profile.rb:-
@@ -220,7 +237,7 @@ msgid "Profile|Updated at"
 msgstr "Última actualización"
 
 #: app/models/profile.rb:-
-msgid "Profile|Net iface"
+msgid "Profile|Network interface"
 msgstr "Interfaz de red"
 
 #: app/models/profile.rb:-
@@ -244,11 +261,11 @@ msgid "terminal"
 msgstr "terminal"
 
 #: app/models/terminal.rb:-
-msgid "Terminal|Ipaddr"
+msgid "Terminal|IP address"
 msgstr "Dirección IP"
 
 #: app/models/terminal.rb:-
-msgid "Terminal|Serveraddr"
+msgid "Terminal|Server address"
 msgstr "Dirección del servidor"
 
 #: app/models/terminal.rb:-
@@ -260,7 +277,7 @@ msgid "Terminal|Updated at"
 msgstr "Última actualización"
 
 #: app/models/terminal.rb:-
-msgid "Terminal|Term class"
+msgid "Terminal|Terminal class"
 msgstr "Clase de terminal"
 
 #: app/models/net_iface.rb:-
@@ -278,10 +295,6 @@ msgstr "dispositivo de disco"
 #: app/models/disk_dev.rb:-
 msgid "DiskDev|Name"
 msgstr "Nombre"
-
-#: app/models/disk_dev.rb:-
-msgid "DiskDev|Filename"
-msgstr "Nombre de archivo"
 
 #: app/models/disk_dev.rb:-
 msgid "DiskDev|Created at"
@@ -320,7 +333,7 @@ msgid "TermClass|Path"
 msgstr "Ruta"
 
 #: app/models/term_class.rb:-
-msgid "TermClass|Params"
+msgid "TermClass|Parameters"
 msgstr "Parámetros"
 
 #: app/models/term_class.rb:-
@@ -344,16 +357,16 @@ msgid "Sysuser|Login"
 msgstr "Login"
 
 #: app/models/sysuser.rb:-
-msgid "Sysuser|Passwd"
+msgid "Sysuser|Password"
 msgstr "Contraseña"
 
 #: app/models/sysuser.rb:-
-msgid "Sysuser|Pw salt"
+msgid "Sysuser|Password salt"
 msgstr "Salt de la contraseña"
 
 #: app/models/sysuser.rb:-
-msgid "Sysuser|Admin"
-msgstr "Admin"
+msgid "Sysuser|Administrator"
+msgstr "Administrador"
 
 #: app/models/sysuser.rb:-
 msgid "Sysuser|Created at"
@@ -380,7 +393,7 @@ msgid "SysConf|Key"
 msgstr "Llave"
 
 #: app/models/sys_conf.rb:-
-msgid "SysConf|Descr"
+msgid "SysConf|Description"
 msgstr "Descripción"
 
 #: app/models/sys_conf.rb:-
@@ -420,19 +433,19 @@ msgid "Laboratory|Name"
 msgstr "Nombre"
 
 #: app/models/laboratory.rb:-
-msgid "Laboratory|Descr"
+msgid "Laboratory|Description"
 msgstr "Descripción"
 
 #: app/models/laboratory.rb:-
-msgid "Laboratory|Mac base addr"
+msgid "Laboratory|MAC base address"
 msgstr "Dirección MAC base"
 
 #: app/models/laboratory.rb:-
-msgid "Laboratory|Max instances"
+msgid "Laboratory|Maximum instances"
 msgstr "Instancias máximas"
 
 #: app/models/laboratory.rb:-
-msgid "Laboratory|Start instances"
+msgid "Laboratory|Instances to start"
 msgstr "Instancias a iniciar"
 
 #: app/models/laboratory.rb:-
@@ -546,3 +559,9 @@ msgstr "El campo %s no está definido para %s"
 #: lib/menu_tree.rb:25
 msgid "Unexpected arguments received: "
 msgstr "Argumentos inesperados: "
+
+#~ msgid "DiskDev|Filename"
+#~ msgstr "Nombre de archivo"
+#~ msgid "Laboratory|Start instances"
+#~ msgstr "Instancias a iniciar"
+
