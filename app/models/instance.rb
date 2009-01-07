@@ -83,14 +83,18 @@ class Instance
   end
 
   # Starts a new instance running with the given profile. Returns the
-  # instance object.
-
+  # instance object. If the instance was not successfully started, an
+  # Instance::InvalidInstance exception will be raised.
   def self.start(prof)
     # Accept being called either with an instantiated profile or with
     # its ID
     prof = Profile.find(prof) if prof.is_a? Fixnum
+    lab = prof.laboratory
+    inst_num = lab.next_instance_to_start
     cmd = prof.start_command
     system(cmd)
+
+    self.new(lab, inst_num)
   end
   
   # Initializing an #Instance means verifying the PID file it
@@ -207,11 +211,11 @@ class Instance
   # state
   def base_info_file
     ck_valid
-    File.join(SysConf.value_for(:pid_dir), '%s_%d' % @laboratory.name, @num)
+    File.join(SysConf.value_for(:pid_dir), '%s_%d' % [@laboratory.name, @num])
   end
   
   # If an #Instance is not valid, this method will raise an
-  # InvalidInstance exception
+  # Instance::InvalidInstance exception
   def ck_valid
     # Don't check on @pid, as it is only filled after some methods are
     # invoked
@@ -222,7 +226,6 @@ class Instance
   # Marks this #Instance as invalid - Cleans up its PIDfile and
   # empties its attributes
   def invalidate
-    ck_valid
     clean_files
     @num = @laboratory = @pid = @profile = nil
   end
