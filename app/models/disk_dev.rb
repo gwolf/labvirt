@@ -148,7 +148,7 @@ class DiskDev < ActiveRecord::Base
     # SCSI and virtio devices require adding explicitly 'boot=on'
     res << ',boot=on' if media_type.name =~ /^(scsi|virtio)$/
     # Activate snapshot mode unless we are in maintenance mode
-    res << ',snapshot=on' if profile.maint_mode?
+    res << ',snapshot=on' if !profile.maint_mode?
     res
   end
 

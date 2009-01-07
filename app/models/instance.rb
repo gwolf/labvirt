@@ -41,16 +41,18 @@ class Instance
   # existing laboratory will be ignored.
   def self.all_running(quiet=nil)
     laboratories = Laboratory.find(:all)
-    instances = []
+    instances = {}
     laboratories.each { |l| instances[l.id] = [] }
 
     Dir.open(SysConf.value_for(:pid_dir)).each do |file|
       next unless file =~ /^(.*)_(\d+)\.pid/
       lab_name = $1
-      instance = $2
+      inst_num = $2
       next unless lab = laboratories.select {|p| p.name == lab_name}[0]
-
-      instances[lab.id] << self.new(lab, instance)
+      next unless instance = self.new(lab, inst_num)
+      next unless instance.running?
+      
+      instances[lab.id] << instance
     end
 
     instances
@@ -94,21 +96,49 @@ class Instance
     cmd = prof.start_command
     system(cmd)
 
-    self.new(lab, inst_num)
+    instance = self.new(lab, inst_num)
+    File.open(instance.prof_file, 'w') {|f| f.write prof.id}
+    instance
   end
   
   # Initializing an #Instance means verifying the PID file it
   # represents exists and retreiving the PID. To initialize it,
   # provide a #Laboratory and an #Instance ID.
   # 
-  # An #Instance will be initialized even if the PID it refers to is
-  # no longer running - Use #running? / #clean_files if needed.
+  # Initializing an instance which is not running (i.e. the VM was
+  # forcibly shut down) will raise an Instance::InvalidInstance
+  # exception.
   def initialize(lab, num)
-    lab = Laboratory.find_by_id(lab) if lab.is_a? Fixnum
+    lab = Laboratory.find(lab) if lab.is_a? Fixnum
     @laboratory = lab
-    @num = num
+    @num = num.to_i
 
     get_pid_and_profile
+  end
+
+  # Sends a powerdown ACPI signal to a given VM #Instance. This is the
+  # preferred way to shut down a VM, as the signal will be received by
+  # its operating system and allow for a clean shutdown. The down side
+  # is that the OS might choose to ignore it, or it might take some
+  # time. 
+  #
+  # If a #power_down is not enough for your needs, you might want to
+  # perform a #stop. 
+  def power_down
+    send_to_vm('system_powerdown')
+  end
+
+  # Sends a reset signal to a given VM #Instance. This is equivalent
+  # to pushing the machine's "reset" button - It is performed "on the
+  # spot". If your machine has any media mounted with write access
+  # (i.e. specially if it is running under its #Profile's maintenance
+  # mode), you should better shut it down cleanly.
+  #
+  # For VMs which are mounted in snapshot mode, this is _not_ the same
+  # as stopping and restarting it. Calling this method is equivalent
+  # to resetting the machine _in the exact state it is_.
+  def reset
+    send_to_vm('system_reset')
   end
 
   # Stops a given VM #Instance. Note that stopping the machine is
@@ -122,7 +152,7 @@ class Instance
   # 
   # Once KVM is killed, this #Instance becomes useless (as it refers
   # to a no longer existing process) and invalidates itself
-  # (i.e. becomes a useless, empty object)
+  # (i.e. cleans the PID files and becomes a useless, empty object)
   def stop
     ck_valid
     Process.kill 15, @pid if running?
@@ -136,7 +166,7 @@ class Instance
   #
   # Once KVM is killed, this #Instance becomes useless (as it refers
   # to a no longer existing process) and invalidates itself
-  # (i.e. becomes a useless, empty object)
+  # (i.e. cleans the PID files and  becomes a useless, empty object)
   def kill
     ck_valid
     Process.kill 9, @pid if running?
@@ -147,13 +177,15 @@ class Instance
   # Returns true if this #Instance's PID is (or appears to be) running. 
   # 
   # We check only for the process' existence and command name,
-  # verifying only if the cmdline includes the 'kvm' string. Be aware
-  # that this check is _not_ foolproof!
+  # verifying only if the cmdline includes the basename of the string
+  # in the :kvm_bin #SysConf entry (that is, quite probably 'kvm'). Be
+  # aware that this check is _not_ foolproof!
   def running?
     ck_valid
-    Dir.open('/proc').each do |pid| 
-      return if pid.chomp == @pid.to_s and 
-        File.read("/proc/#{@pid}/cmdline") =~ /kvm/
+    begin
+      kvm = File.basename(SysConf.value_for :kvm_bin)
+      return true if File.read("/proc/#{@pid}/cmdline") =~ /#{kvm}/
+    rescue Errno::ENOENT
     end
     false
   end
@@ -173,6 +205,22 @@ class Instance
     ck_valid
     File.unlink(pid_file) if File.exists?(pid_file)
     File.unlink(prof_file) if File.exists?(prof_file)
+    File.unlink(socket_file) if File.exists?(socket_file)
+  end
+
+  # Gets the full path for this #Instance's expected PIDfile
+  def pid_file
+    base_info_file + '.pid'
+  end
+  
+  # Gets the full path for this #Instance's expected profile file
+  def prof_file
+    base_info_file + '.profile'
+  end
+  
+  # Gets the full path for this #Instance's expected socket file
+  def socket_file
+    base_info_file + '.socket'
   end
 
   private
@@ -191,27 +239,17 @@ class Instance
     # However, the profile file is merely informational. We can safely
     # ignore it if it does not exist or is not readable
     begin
-      @profile = Profile.find_by_id(File.read(proc_file).chomp.to_i)
+      @profile = Profile.find_by_id(File.read(prof_file).to_i)
     rescue Errno::ENOENT, Errno::EACCES
       @profile = nil
     end
-  end
-
-  # Gets the full path for this #Instance's expected PIDfile
-  def pid_file
-    base_info_file + '.pid'
-  end
-  
-  # Gets the full path for this #Instance's expected profile file
-  def prof_file
-    base_info_file + '.profile'
   end
   
   # Generates the base filename for the files we will use to store our
   # state
   def base_info_file
     ck_valid
-    File.join(SysConf.value_for(:pid_dir), '%s_%d' % [@laboratory.name, @num])
+    File.join(SysConf.value_for(:pid_dir), '%s_%03d' % [@laboratory.name, @num])
   end
   
   # If an #Instance is not valid, this method will raise an
@@ -228,5 +266,12 @@ class Instance
   def invalidate
     clean_files
     @num = @laboratory = @pid = @profile = nil
+  end
+
+  # Sends the specified command to the virtual machine console. 
+  def send_to_vm(command)
+    socket = UNIXSocket.new(socket_file)
+    socket.puts(command)
+    socket.close
   end
 end

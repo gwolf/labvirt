@@ -90,7 +90,7 @@ class Laboratory < ActiveRecord::Base
   # be assigned; If no further instances can be currently started for
   # this #Laboratory, raises a #NoMoreAvailableInstances exception
   def next_instance_to_start
-    active = active_instances
+    active = active_instances.map {|inst| inst.num.to_i}
     if active.size >= max_instances
       raise NoMoreAvailableInstances, 
       _('Laboratory %s (%d) has reached its maximum number of instances (%d)') %

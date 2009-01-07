@@ -140,15 +140,23 @@ class Profile < ActiveRecord::Base
     can_start_instance? or return nil
 
     kvm = SysConf.value_for('kvm_bin')
+    basedir = SysConf.value_for(:pid_dir)
+
     inst_num = maint_mode? ? 0 : laboratory.next_instance_to_start
-    inst_name = sprintf '%s_%02d' % [laboratory.name, inst_num]
+    inst_name = sprintf '%s_%03d' % [laboratory.name, inst_num]
     mac = laboratory.mac_for_instance(inst_num)
     disks = disk_devs.map {|d| d.dev_string }.join(' ')
-    pidfile = File.join(SysConf.value_for(:pid_dir),"#{inst_name}.pid")
 
-    "#{kvm} -name #{inst_name} -m #{ram} -daemonize -localtime -usb " +
-      "-usbdevice tablet -net nic,macaddr=#{mac},model=#{net_iface.name} " +
-      "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup " +
-      "-pidfile #{pidfile} -boot c #{disks}"
+    pidfile = File.join(basedir,"#{inst_name}.pid")
+    socket = File.join(basedir, "#{inst_name}.socket")
+
+    [ "#{kvm} -name #{inst_name} -m #{ram} -localtime -pidfile #{pidfile}",
+      "-usb -usbdevice tablet",
+      "-net nic,macaddr=#{mac},model=#{net_iface.name}",
+#      "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup",
+      "-boot c #{disks}",
+      "-daemonize -nographic",
+      "-monitor unix:#{socket},server,nowait"
+      ].join(' ')
   end
 end
