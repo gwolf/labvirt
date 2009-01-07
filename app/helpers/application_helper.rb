@@ -3,11 +3,16 @@ module ApplicationHelper
   ######################################################################
   # Layout-related elements
   def show_flash
-    flash.map do |level, message|
-      message = message.join("<br/>") if message.is_a? Array
-      flash.discard(level)
-      '<div id="flash-%s">%s</div>' % [level, message]
-    end
+    [ '<div id="flash">',
+      flash.map do |level, message|
+        next if message.nil?
+        message = message.join("<br/>") if message.is_a? Array
+        flash.discard(level)
+        next if message.nil? or message.empty?
+        '<div class="%s">%s</div>' % [level, message]
+      end,
+      '</div>'
+    ].join("\n")
   end
 
   def login_data

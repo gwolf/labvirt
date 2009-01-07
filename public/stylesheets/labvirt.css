@@ -175,7 +175,7 @@ a:hover {
     background-position: 0.5em 0.5em;
 }
 
-#flash-error, #flash-warning, #flash-notice { 
+#flash { 
        padding: 0.2em;
        margin-left: auto;
        margin-right: auto;
@@ -187,19 +187,19 @@ a:hover {
        display: block;
 }
 
-#flash-error { 
+.error { 
        color: #f00;
        background-color: #ffd;
        border: solid #f00 2px;
 }
 
-#flash-warning {  
+.warning {  
        color: #000;
        background-color: #eee;
        border: solid #000 2px;
 }
 
-#flash-notice {  
+.notice {  
        color: #557;
        background-color: #ddf;
        border: solid #557 2px;

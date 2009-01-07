@@ -1,6 +1,6 @@
 %h3= _('Client parameters')
 - if ! @item.params_complete?
-  %p
+  %p.error
     = _('This terminal is <b>not</b> ready to be used.')
     = _('The following parameters are missing: %s') % @item.missing_params.join(', ')
 %p= _('The following parameters are defined:')
