@@ -109,7 +109,7 @@ class Instance
   # forcibly shut down) will raise an Instance::InvalidInstance
   # exception.
   def initialize(lab, num)
-    lab = Laboratory.find(lab) if lab.is_a? Fixnum
+    lab = Laboratory.find_by_id(lab) unless lab.is_a? Laboratory
     @laboratory = lab
     @num = num.to_i
 
@@ -174,6 +174,19 @@ class Instance
     invalidate
   end
 
+  # Shows the command line used to start this instance (from
+  # /proc/<pid>/cmdline), if it is available to us. If it is not
+  # readable, returns nil.
+  def cmdline
+    begin
+      # The arguments are separated by nulls (\000) - Substitute it
+      # with spaces, which is way more human.
+      File.read("/proc/#{@pid}/cmdline").gsub /\000/, ' '
+    rescue Errno::ENOENT
+      nil
+    end
+  end
+
   # Returns true if this #Instance's PID is (or appears to be) running. 
   # 
   # We check only for the process' existence and command name,
@@ -182,12 +195,8 @@ class Instance
   # aware that this check is _not_ foolproof!
   def running?
     ck_valid
-    begin
-      kvm = File.basename(SysConf.value_for :kvm_bin)
-      return true if File.read("/proc/#{@pid}/cmdline") =~ /#{kvm}/
-    rescue Errno::ENOENT
-    end
-    false
+    kvm = File.basename(SysConf.value_for :kvm_bin)
+    cmdline =~ /#{kvm}/
   end
 
   # Returns true if this #Instance is in maintenance mode - That is,
@@ -275,3 +284,20 @@ class Instance
     socket.close
   end
 end
+
+# Might come in handy - We might go libvirt!
+#
+# (2009-01-13 10:23:22) gwolf: mDuff: Ok... I am working on (yes, yet another) control interface... And I'm using straight kvm, for several details that libvirt didn't solve for me. I am querying/controlling my VMs via a socket to the monitor - but there are several things I have not found out how to query (i.e. whether the machine is running or paused)
+# (2009-01-13 10:24:03) gwolf: So... Where should I look for this information? I am even gathering some information from /proc/$pid/cmdline (i.e. which HD image it is working from) as I cannot get it from the VM
+# (2009-01-13 10:24:17) gwolf: but that's... obviously suboptimal and rigid
+# (2009-01-13 10:24:56) onos: mDuff: alright, I converted in qcow2, thank you once again :) have a good day
+# (2009-01-13 10:27:34) mDuff: gwolf, ehh... good question. If all control is going through your interface, you can take libvirt's approach and only track VMs started via your interface, right? btw, I'm a little curious about what libvirt isn't doing for you
+# (2009-01-13 10:28:42) gwolf: mDuff: I decided against libvirt because it didn't (maybe some months ago.. don't know now - and, at least, via the interfaces I checked) have support for running multiple VMs off a single HD image mounted as a snapshot
+# (2009-01-13 10:33:43) mDuff: gwolf, ...err... if you use qemu-img create -b my-snapshot.qcow2 my-working-space-vm1.img, and then define a VM using my-working-space-vm1.img, that'll work just fine
+# (2009-01-13 10:33:53) mDuff: gwolf, ...and you can run others under my-working-space-vm2.img etc.
+# (2009-01-13 10:33:59) mDuff: gwolf, ...been that way for pretty much ever.
+# (2009-01-13 10:34:46) mDuff: gwolf, (well, since I first started using libvirt, over a year ago)
+# (2009-01-13 10:35:43) gwolf: mDuff: umh... No, I don't mean VM snapshots, but having disk devices defined such as "-drive index=1,media=disk,if=ide,snapshot=on,file=/home/gwolf/kvm/wxp " - But no, I'm not ruling out my own stupidity :)
+# (2009-01-13 10:36:45) mDuff: gwolf, using snapshot=on is entirely equivalent to using qemu-img backend files but unlinking the file after the VM has started -- indeed, that's how it's implemented under-the-hood.
+# (2009-01-13 10:37:11) mDuff: gwolf, ...you don't have the commit command as a console builtin in that case, but you can use qemu-img commit with the VM shutdown for equivalent semantics.
+# (2009-01-13 10:37:48) onos: mDuff: (sorry to charge again) I don't find how to use savevm. I find a loadvm in the man qemu, but nothing else. and savevm unknown command of course
