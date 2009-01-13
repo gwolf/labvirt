@@ -37,16 +37,20 @@ class GenericComponentController < ApplicationController
   def new
     @item = @model.new
     @pg_title = @labels[:new_title]
-    render :action => 'generic/edit'
-    return true unless request.post?
-    begin
-      @item.update_attributes!(params[:item])
-      flash[:notice] = @labels[:create_ok]
-      redirect_to :action => 'list'
-    rescue ActiveRecord::RecordInvalid => err
-      flash[:error] = @labels[:create_error] +
-        err.record.errors.full_messages.join('<br/>')
+
+    if request.post?
+      begin
+        @item.update_attributes!(params[:item])
+        flash[:notice] = @labels[:create_ok]
+        redirect_to :action => 'list'
+        return true
+      rescue ActiveRecord::RecordInvalid => err
+        flash[:error] = @labels[:create_error] +
+          err.record.errors.full_messages.join('<br/>')
+      end
     end
+
+    render :action => 'generic/edit'
   end
 
   def edit
