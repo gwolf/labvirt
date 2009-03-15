@@ -11,12 +11,12 @@ module TerminalsHelper
   end
 
   def row_for_term_list(term)
-    [ term.id, term.ipaddr, term.serveraddr, term.term_class.name, 
+    [ term.id, term.termid, term.serveraddr, term.term_class.name, 
       [ link_to(edit_icon, :action => 'edit', :id => term.id),
         link_to(delete_icon, {:action => 'delete', :id => term.id},
                 :method => 'post', 
                 :confirm => _("Are you sure you want to remove %s?") %
-                term.ipaddr)].join(' ')
+                term.termid)].join(' ')
     ]
   end
 

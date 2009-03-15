@@ -16,13 +16,13 @@ class CreateTerminals < ActiveRecord::Migration
                                  :params => tc[2]).save! }
 
     create_table :terminals do |t|
-      t.string :ipaddr, :null => false
+      t.string :termid, :null => false
       t.string :serveraddr, :null => false
       t.timestamps
     end
     add_reference(:terminals, :term_classes, :null => false, 
                   :default => TermClass.find(:first, :order => 'id').id)
-    add_index :terminals, :ipaddr, :unique => true
+    add_index :terminals, :termid, :unique => true
 
     create_table :term_params do |t|
       t.string :name, :null => false

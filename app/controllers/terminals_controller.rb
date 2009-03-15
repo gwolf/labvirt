@@ -53,7 +53,7 @@ class TerminalsController < GenericComponentController
   # authentication.
   def config
     client_ip = request.remote_ip
-    term = Terminal.find_by_ipaddr(client_ip) or
+    term = Terminal.find_by_termid(client_ip) or
       raise PerIPPermissionDenied, _('Unknown terminal %s') % client_ip
     render :text => "#{term.client_command_line}\n"
   end
@@ -65,10 +65,10 @@ class TerminalsController < GenericComponentController
       :create_error => _('Error saving requested data: '),
       :list_title => _('Terminals listing'),
       :new_title => _('Define a new terminal')}
-    @fields = {:list => %w(id ipaddr serveraddr term_class),
-      :edit => %w(id ipaddr serveraddr term_class_id)}
+    @fields = {:list => %w(id termid serveraddr term_class),
+      :edit => %w(id termid serveraddr term_class_id)}
     @list_include = 'term_class'
-    @sortable = { :id => 'terminals.id', :ip => 'ipaddr', 
+    @sortable = { :id => 'terminals.id', :ip => 'termid', 
       :server => 'serveraddr', :class => 'term_classes.name, terminals.id' }
   end
 end

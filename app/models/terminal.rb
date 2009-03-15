@@ -13,8 +13,10 @@
 #
 # === Attributes
 #
-# [ipaddr] The IP address this terminal has. This will act as the key
-#          for which configuration it should be served.
+# [termid] A string which uniquely identifies a terminal. This can be
+#          the terminal's IP or MAC addresses, or any string set by
+#          the administrator. This string will be used for
+#          bootstrapping the terminal.
 #
 # [serveraddr] The IP address of the server it should connect to
 class Terminal < ActiveRecord::Base
@@ -23,11 +25,11 @@ class Terminal < ActiveRecord::Base
 
   # The server address is not validated - we can often get here
   # symbolic hostnames instead of IP addresses
-  validates_presence_of :ipaddr
+  validates_presence_of :termid
   validates_presence_of :serveraddr
   validates_presence_of :term_class_id
-  validates_uniqueness_of :ipaddr
-  validates_format_of :ipaddr, :with => /\A(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\Z/
+  validates_uniqueness_of :termid
+#  validates_format_of :termid, :with => /\A(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\Z/
   validates_associated :term_class
 
   # Builds the command line to be called based on the #path to run

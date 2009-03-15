@@ -153,7 +153,7 @@ class Profile < ActiveRecord::Base
     [ "#{kvm} -name #{inst_name} -m #{ram} -localtime -pidfile #{pidfile}",
       "-usb -usbdevice tablet",
       "-net nic,macaddr=#{mac},model=#{net_iface.name}",
-#      "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup",
+      "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup",
       "-boot c #{disks}",
       "-daemonize -nographic",
       "-monitor unix:#{socket},server,nowait"
