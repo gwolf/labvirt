@@ -1,14 +1,25 @@
-= _('Laboratory "%s": %d instances')% [lab.name, @active[lab].size]
 - lab_div_id = "lab-#{lab.id}"
-= link_to_function _('-->'), visual_effect(:toggle_blind, lab_div_id)
-%div{:id => lab_div_id, :style => 'display: none'}
-  - @active[lab].each do |inst|
-    - inst_div_id = "inst-#{lab.id}-#{inst.num}"
-    = _('Instance %s: Profile "%s"') % [inst.num, inst.profile.name]
-    = link_to_function _('-->'), visual_effect(:toggle_blind, inst_div_id)
-    / Actions: power_down, reset, stop, kill, running?, maint?
-    %div{:id => inst_div_id, :style => 'display: none'}
-      %p= link_to _('Stop instance'), :action => 'stop_instance', :lab_id => lab.id, :inst_num => inst.num
-      %p= _('VM PID: %d') % inst.pid
-      %p
-        %tt= inst.cmdline
+%dt
+  = lab.name
+%dd
+  = _('Active instances: %d') % @active[lab].size
+  %br
+  = link_to(_('Laboratory definition'), :controller => 'laboratories', :action => 'edit', :id => lab.id)
+  = link_to_function _("Instances' data"), visual_effect(:toggle_blind, lab_div_id)
+  %ul.instances
+    %div{:id => lab_div_id, :style => 'display: none'}
+      - @active[lab].each do |inst|
+        %li
+          - inst_div_id = "inst-#{lab.id}-#{inst.num}"
+          = _('Instance: %s (profile: %s)') % [inst.num, link_to(inst.profile.name, :controller => 'profiles', :action => 'edit', :id => inst.profile.id)]
+          = link_to_function _('Show details'), visual_effect(:toggle_blind, inst_div_id)
+          %br
+            / Actions: power_down, reset, stop, kill, running?, maint?
+            = stop_link_for(inst, lab)
+            = reset_link_for(inst, lab)
+            %div{:id => inst_div_id, :style => 'display: none'}
+              %dl.instance-details
+                %dt= _('VM PID')
+                %dd= inst.pid
+                %dt= _('Command line')
+                %dd.cmdline= inst.cmdline

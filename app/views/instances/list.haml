@@ -1,17 +1,22 @@
 %h1= _('Active instances, by laboratory')
-- @active.keys.sort_by {|lab| lab.id}.each do |lab|
-  - next if @active[lab].empty?
-  = render(:partial => 'instances_for_lab', :locals => {:lab => lab})
+%dl.activelabs
+  - @active.keys.sort_by {|lab| lab.id}.each do |lab|
+    - next if @active[lab].empty?
+    = render(:partial => 'instances_for_lab', :locals => {:lab => lab})
 
-%h1= _('Profiles for which a new instance can be started')
-- @prof_start_ok.each do |prof|
-  %p
+%h3= _('Profiles for which a new instance can be started')
+- if @prof_start_ok.empty?
+  %p= _('No profiles can currently be started')
+- else
+  - @prof_start_ok.each do |prof|
+    %p
+      = prof.name
+      %span[prof]
+        = prof.descr
+      = link_to _('Start instance'), :action => 'start_instance', :profile_id => prof
+
+- if !@prof_no_start.empty?
+  %h3= _('Profiles which cannot be currently started')
+  / Include the explanation on why not
+  - @prof_no_start.each do |prof|
     = prof.name
-    %span[prof]
-      = prof.descr
-    = link_to _('Start instance'), :action => 'start_instance', :profile_id => prof
-
-%h1= _('Profiles which cannot be currently started')
-/ Include the explanation on why not
-- @prof_no_start.each do |prof|
-  = prof.name

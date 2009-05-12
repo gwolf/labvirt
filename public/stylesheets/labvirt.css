@@ -301,3 +301,15 @@ td, th {
     padding-left: 0.3em;
     padding-right: 0.3em;
 }
+
+.instance-details {
+    font-size: 80%;
+}
+
+dt {
+    font-weight: bold;
+}
+
+.cmdline {
+    font-family: "Courier New" Courier monospace;
+}

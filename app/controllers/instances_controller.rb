@@ -1,4 +1,6 @@
 class InstancesController < ApplicationController
+  before_filter :get_instance, :only => [:stop, :reset]
+
   def list
     # We get the data from Instance#all_running with the lab_id as the
     # key - Replace it for the full Laboratory object
@@ -19,14 +21,26 @@ class InstancesController < ApplicationController
     redirect_to :action => 'list'
   end
 
-  def stop_instance
+  def stop
+    @instance.kill
+    redirect_to :action => 'list'
+  end
+
+  def reset
+    @instance.reset
+    redirect_to :action => 'list'
+  end
+
+  private
+  def get_instance
     begin
       (lab_id, inst_num) = params[:lab_id], params[:inst_num]
-      Instance.new(lab_id, inst_num).kill
+      @instance = Instance.new(lab_id, inst_num)
     rescue Instance::InvalidInstance => err
-      flash[:error] = [_('Error stopping requested instance (%s-%s): ')%[lab_id, inst_num],
+      flash[:error] = [_('Requested instance is not running (%s-%s): ') %
+                       [lab_id, inst_num],
                        err]
+      return false
     end
-    redirect_to :action => 'list'
   end
 end
