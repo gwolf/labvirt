@@ -84,7 +84,7 @@ class GenericComponentController < ApplicationController
     return true unless request.post?
     begin
       @model.find(params[:id]).destroy
-      flash[:notice] = _'The terminal has been successfully deleted'
+      flash[:notice] = _'The %s has been successfully deleted' % @model_name
     rescue ActiveRecord::RecordInvalid => err
       flash[:error] = _('Could not delete requested terminal: ') +
         err.record.errors.full_messages.join('<br/>')

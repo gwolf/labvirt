@@ -1,4 +1,30 @@
 class DiskDevsController < GenericComponentController
+  def duplicate
+    begin
+      orig = DiskDev.find(params[:id])
+      # This can potentially take much longer than what we are willing
+      # to wait with a Web client expecting an answer... Forking is
+      # the only sane way. Later on, maybe adding a AJAX observer,
+      # monitoring the cloned device?
+#      fork { orig.copy }
+      orig.copy 
+    rescue ActiveRecord::RecordNotFound
+    end
+
+    redirect_to :action => 'list'
+  end
+
+  def delete
+    redirect_to :action => 'list'
+    return true unless request.post?
+    begin
+      DiskDev.find(params[:id]).destroy
+      flash[:notice] = _'The device has been successfully deleted'
+    rescue ActiveRecord::RecordInvalid => err
+      flash[:error] = _('Could not delete requested terminal: ') +
+        err.record.errors.full_messages.join('<br/>')
+    end
+  end
 
   private
   def setup_ctrl

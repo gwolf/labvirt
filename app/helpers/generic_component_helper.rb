@@ -30,13 +30,15 @@ module GenericComponentHelper
         link_to_disk_type(value)
       when 'term_class'
         link_to_term_class(value)
+      when 'terminal_ids'
+        value.map {|v| link_to_terminal(Terminal.find(v))}.join(', ')
       else
         value
       end
     end.map {|col| "<td>#{col}</td>"}.join("\n")
   end
 
-  %w(laboratory profile disk_type media_type term_class).each do |dest|
+  %w(laboratory profile disk_type media_type term_class terminal).each do |dest|
     eval <<-END_SRC
       def link_to_#{dest}(item)
         link_to(item.name, :controller => '#{dest.pluralize}',

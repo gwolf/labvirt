@@ -1,0 +1,3 @@
+%td= item.available_for_vm? ? _('Yes') : _('No')
+%td= item.human_size
+%td= link_to('Duplicate', :action => 'duplicate', :id => item.id)

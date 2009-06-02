@@ -7,15 +7,15 @@
     = list_head
     = list_head_extra_col
     %th 
+    %th
   - rows = 0
   - @items.each do |item|
     %tr{:class => ((rows+=1) % 2) == 0 ?        |
                    'table-even' : 'table-odd'}  |
       = list_row(item)
       = list_extra_col(item)
-      %td
-        = edit_link_for item
-        = delete_link_for item
+      %td= edit_link_for item
+      %td= delete_link_for item
 %p
   = link_to @labels[:new_title], :action => 'new'
 

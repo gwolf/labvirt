@@ -94,32 +94,45 @@ class DiskDev < ActiveRecord::Base
   # increased until a free one is found. If the name was explicitly
   # specified and it is already taken, an ActiveRecord::RecordInvalid
   # exception will be raised.
-  def copy(newfile, newname=nil)
+  def copy(newfile=nil, newname=nil)
     cloned = nil
 
-    newpath = File.join(Sysconf.value_for(:disk_dev_path), newfile)
+    orig = filepath
+    newfile = gen_filename_for_copy if newfile.nil?
+    newpath = File.join(SysConf.value_for(:disk_dev_path), newfile)
+
+    # Set up first the database entry, so this action is visible
+    # as soon as possible
+    cloned = self.clone
+    cloned.filename = newfile
+    cloned.name = gen_name_for_copy(newname)
+    cloned.save!
 
     self.transaction do
-      begin
+      begin 
+        raise Errno::ENOENT unless File.exists?(orig)
         raise Errno::EEXIST, newpath if File.exists?(newpath)
-        # File.copy raises exceptions when it fails - Add the explicit
-        # raise only as a catch-all
-        FileUtils::copy(filepath, newpath) or raise Errno::ENOENT
 
-        cloned = self.clone
-        cloned.filename = newfile
-        cloned.name = gen_name_for_copy(newname)
-        cloned.save!
-
+        FileUtils::copy(filepath, newpath)
       rescue => err
         # Remove the created file - Unless, of course, it was not
-        # created by us, and propagate the exception to the caller
+        # created by us, and propagate the exception to the
+        # caller. Clear the database entry as well.
         File.unlink(newpath) unless err.is_a? Errno::EEXIST
+        cloned.destroy
         raise err
       end
     end
 
     cloned
+  end
+
+  def destroy
+    begin
+      File.unlink(filepath)
+    rescue Errno::ENOENT
+    end
+    super
   end
 
   # The disk size of an image. Note that this is the space it actually
@@ -131,7 +144,22 @@ class DiskDev < ActiveRecord::Base
   # sparse files are reported with their full space assignation, not
   # counting out their empty areas.
   def size
-    File.size(filepath)
+    begin
+      File.size(filepath)
+    rescue Errno::ENOENT
+      nil
+    end
+  end
+
+  # How should a human get (and understand) the size? In familiar
+  # bytes/KB/MB/GB representations
+  def human_size
+    return nil if size.nil?
+    s = self.size.to_f # So in the divisions we don't lose the decimals
+    return _('%.2f GB') % (s/(1024*1024*1024)) if size > 1024*1024*1024
+    return _('%.2f MB') % (s/(1024*1024)) if size > 1024*1024
+    return _('%.2f KB') % (s/1024) if size > 1024
+    return _('%d bytes') % s
   end
 
   # Full pathname to this image's file (i.e. including the systemwide
@@ -166,5 +194,27 @@ class DiskDev < ActiveRecord::Base
     end
 
     newname
+  end
+
+  # When cloning a DiskDev, if no filename is explicitly specified,
+  # this function will generate one. 
+  def gen_filename_for_copy
+    # Try to preserve the file extension, if found. 
+    if filename =~ /(.*)\.([^.]+)/
+      base, ext = $1, $2
+    else
+      base, ext = filename, nil
+    end
+
+    num = 1
+    while true
+      newfile = '%s_%03d' % [base, num]
+      newfile += '.%s' % ext if ext
+
+      return newfile unless
+        File.exists?(File.join(SysConf.value_for(:disk_dev_path), newfile))
+
+      num+=1
+    end
   end
 end

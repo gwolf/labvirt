@@ -38,6 +38,10 @@ class Terminal < ActiveRecord::Base
     "#{term_class.path} #{client_params(options)}"
   end
 
+  # The 'name' for a terminal is its termid - This is used in the
+  # generic helper
+  def name; termid;end
+
   # Builds the parameters for the client command line, substituting
   # where pertinent the values from #client_param_hash.
   #
