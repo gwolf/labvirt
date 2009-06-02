@@ -4,4 +4,4 @@
 - else
   = render :partial => 'extra_params'
   %h3= _('Generated client command line')
-  %pre= @item.client_command_line
+  %p.cmdline= @item.client_command_line

@@ -8,12 +8,7 @@
 - if @prof_start_ok.empty?
   %p= _('No profiles can currently be started')
 - else
-  - @prof_start_ok.each do |prof|
-    %p
-      = prof.name
-      %span[prof]
-        = prof.descr
-      = link_to _('Start instance'), :action => 'start_instance', :profile_id => prof
+  = profiles_per_lab(@prof_start_ok)
 
 - if !@prof_no_start.empty?
   %h3= _('Profiles which cannot be currently started')

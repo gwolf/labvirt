@@ -9,7 +9,9 @@ class InstancesController < ApplicationController
     instances.keys.each do |lab_id|
       @active[Laboratory.find(lab_id)] = instances[lab_id]
     end
-    (@prof_start_ok, @prof_no_start) = Profile.find(:all).partition {|p| p.can_start_instance?}
+
+    (@prof_start_ok, @prof_no_start) = Profile.find(:all).sort_by {|p| 
+      p.laboratory.id}.partition {|p| p.can_start_instance?}
   end
 
   def start_instance

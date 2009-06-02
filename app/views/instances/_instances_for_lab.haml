@@ -1,10 +1,10 @@
 - lab_div_id = "lab-#{lab.id}"
 %dt
-  = lab.name
+  Laboratory:
+  = link_to lab.name, :controller => 'laboratories', :action => 'edit', :id => lab.id
 %dd
   = _('Active instances: %d') % @active[lab].size
-  %br
-  = link_to(_('Laboratory definition'), :controller => 'laboratories', :action => 'edit', :id => lab.id)
+  •
   = link_to_function _("Instances' data"), visual_effect(:toggle_blind, lab_div_id)
   %ul.instances
     %div{:id => lab_div_id, :style => 'display: none'}
