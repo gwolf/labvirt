@@ -23,7 +23,7 @@ module InstancesHelper
      profs.map {|p| _('<li>%s: %s • %s</li>') % 
        [link_to(p.name, profile_url(p)), p.descr, 
         link_to(_('Start instance'), :action => 'start_instance', 
-                :profile_id => profs)]}, 
+                :profile_id => p)]}, 
      '</ul>'].join("\n")
   end
 
