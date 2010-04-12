@@ -1,0 +1,9 @@
+#!/usr/bin/ruby
+require File.join(File.dirname(__FILE__), '../config/boot')
+require 'environment'
+
+Laboratory.find(:all).map do |lab|
+  1.upto(lab.max_instances) do |num|
+    puts lab.instance_name(num)
+  end
+end
