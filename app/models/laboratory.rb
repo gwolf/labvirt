@@ -40,7 +40,7 @@
 #                 (easier to read) for further details.
 # 
 class Laboratory < ActiveRecord::Base
-  class NoMoreAvailableInstances #:nodoc
+  class NoMoreAvailableInstances < Exception #:nodoc
   end
 
   has_many :profiles, :order => 'position'
@@ -83,7 +83,7 @@ class Laboratory < ActiveRecord::Base
   # the number of #active_instances is the same as #max_instances),
   # this will return nil.
   def default_profile
-    active_profiles.select {|prof| prof.can_start_instance}.first
+    active_profiles.select {|prof| prof.can_start_instance?}.first
   end
 
   # Returns the #Instance ID the next #Instance to be started should
@@ -103,7 +103,10 @@ class Laboratory < ActiveRecord::Base
     raise NoMoreAvailableInstances, _('Cannot assign a new instance number')
   end
 
-  def mac_for_instance(num)
+  # Generates the MAC address for a given instance number (or for the
+  # next available instance, if not specified)
+  def mac_for_instance(num=nil)
+    num = next_instance_to_start if num.nil?
     num = num.to_i if num.is_a?(String) and num =~ /^\d+$/
     if !num.is_a? Fixnum or num < 0 or num > 255 
       raise TypeError, _('Argument must be an integer between 0 and 255')
@@ -112,5 +115,17 @@ class Laboratory < ActiveRecord::Base
     mac = mac_base_addr.gsub(/00$/, offset)
 
     mac
+  end
+
+  # Generates the instance namefor a given instance number (or for the
+  # next available instance, if not specified)
+  def instance_name(num=nil)
+    num = next_instance_to_start if num.nil?
+    sprintf '%s_%03d' % [name, num]
+  end
+
+  # Starts a new instance with the #default_profile
+  def start_instance
+    default_profile.start_instance
   end
 end

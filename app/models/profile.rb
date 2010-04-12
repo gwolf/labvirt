@@ -143,7 +143,7 @@ class Profile < ActiveRecord::Base
     basedir = SysConf.value_for(:pid_dir)
 
     inst_num = maint_mode? ? 0 : laboratory.next_instance_to_start
-    inst_name = sprintf '%s_%03d' % [laboratory.name, inst_num]
+    inst_name = laboratory.instance_name(inst_num)
     mac = laboratory.mac_for_instance(inst_num)
     disks = disk_devs.map {|d| d.dev_string }.join(' ')
 
