@@ -1,1 +1,2 @@
+%td= item.active_instances.size
 %td= item.profiles.map {|p| link_to p.id, :controller => 'profiles', :action => 'edit', :id => p.id}.join(', ')

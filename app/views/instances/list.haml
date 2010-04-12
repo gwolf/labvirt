@@ -13,5 +13,6 @@
 - if !@prof_no_start.empty?
   %h3= _('Profiles which cannot be currently started')
   / Include the explanation on why not
-  - @prof_no_start.each do |prof|
-    = prof.name
+  %ul
+    - @prof_no_start.each do |prof|
+      %li= prof.name
