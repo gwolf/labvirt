@@ -1,0 +1,33 @@
+#!/usr/bin/ruby
+require File.join(File.dirname(__FILE__), '../config/boot')
+require 'environment'
+
+DebugLevel=5
+
+def debug(level, text)
+  puts '*'*(5-level) + ' ' + text if level <= DebugLevel
+end
+
+def start_instances(lab, howmany)
+  howmany.times do |num|
+    begin
+      lab.start_instance
+    rescue NoProfileAvailable
+      debug 0, 'No default profiles available for this laboratory while ' +
+        'starting instance (%d/%d)' % [num, howmany]
+      return nil
+    end
+  end
+end
+
+Laboratory.find(:all).map do |lab|
+  debug 3, 'Laboratory %d (%s)' % [lab.id, lab.name]
+
+  should_have = lab.start_instances
+  active = lab.active_instances.size
+  instances = should_have - active
+
+  debug 5, 'Attempting to start %d instances (%d already active, %d wanted)' % 
+    [instances, active, should_have]
+  start_instances(lab, instances)
+end

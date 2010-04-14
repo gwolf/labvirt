@@ -42,6 +42,8 @@
 class Laboratory < ActiveRecord::Base
   class NoMoreAvailableInstances < Exception #:nodoc
   end
+  class NoProfileAvailable < Exception #:nodoc
+  end
 
   has_many :profiles, :order => 'position'
 
@@ -126,6 +128,8 @@ class Laboratory < ActiveRecord::Base
 
   # Starts a new instance with the #default_profile
   def start_instance
-    default_profile.start_instance
+    prof = default_profile or
+      raise NoProfileAvailable, 'No default profile available'
+    prof.start_instance
   end
 end
