@@ -30,4 +30,17 @@ Laboratory.find(:all).map do |lab|
   debug 5, 'Attempting to start %d instances (%d already active, %d wanted)' % 
     [instances, active, should_have]
   start_instances(lab, instances)
+
+  # Among the currently running instances for this laboratory, does
+  # any require to be restarted?
+  lab.active_instances.each do |inst|
+    next unless inst.needs_restart?
+    prof = inst.profile
+    debug 5, ("Restarting instance %s (profile %s: %s)\n" +
+              "    Restart every %d days; running since %s") %
+      [inst.pid, prof.id, prof.name, prof.restart_freq, inst.startup_time]
+    inst.stop
+    sleep 1 # To insure all resources are freed
+    prof.start_instance
+  end
 end

@@ -45,6 +45,9 @@
 #
 # [extra_params] Any extra parameters to specify to KVM upon virtual
 #                machine instantation
+#
+# [restart_freq] How often should we restart this profile's instances?
+#                (in days; 0 means never to restart them)
 
 class Profile < ActiveRecord::Base
   has_many :disk_devs, :order => 'position'
@@ -54,6 +57,9 @@ class Profile < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :name
+
+  validates_presence_of :restart_freq
+  validates_numericality_of :restart_freq, :greater_than_or_equal_to => 0
 
   validates_inclusion_of :active, :in => [true, false]
   validates_inclusion_of :maint_mode, :in => [true, false]

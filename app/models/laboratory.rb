@@ -1,3 +1,7 @@
+class NoMoreAvailableInstances < Exception #:nodoc
+end
+class NoProfileAvailable < Exception #:nodoc
+end
 # A #Laboratory defines a series of virtual machines on which given
 # #Profile instances can be created. The #Profile list for each
 # #Laboratory can be ordered, so the highest-ranking profile will be
@@ -40,10 +44,6 @@
 #                 (easier to read) for further details.
 # 
 class Laboratory < ActiveRecord::Base
-  class NoMoreAvailableInstances < Exception #:nodoc
-  end
-  class NoProfileAvailable < Exception #:nodoc
-  end
 
   has_many :profiles, :order => 'position'
 

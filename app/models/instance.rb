@@ -96,6 +96,9 @@ class Instance
     cmd = prof.start_command
     system(cmd)
 
+    # The KVM invocation garbles up the terminal - Make it sane again
+    system('stty sane 2>/dev/null')
+
     instance = self.new(lab, inst_num)
     File.open(instance.prof_file, 'w') {|f| f.write prof.id}
     instance
@@ -230,6 +233,27 @@ class Instance
   # Gets the full path for this #Instance's expected socket file
   def socket_file
     base_info_file + '.socket'
+  end
+
+  # Process startup time - When was this instance started: Creation
+  # time of the inode in the /proc filesystem
+  def startup_time
+    pid = Instance.running_for_profile(2)[0].pid.to_s
+    File.stat(File.join('/proc', pid)).ctime
+  end
+
+  # Process age (in seconds): How long has this instance been running
+  def age
+    Time.now - startup_time
+  end
+
+  # Returns true if the instance's age is greater than its profile's
+  # restart_freq (indicated in days, with 0 indicating restart is
+  # never needed)
+  def needs_restart?
+    return false if profile.restart_freq == 0
+    # Age is given in seconds - 86400 seconds to a day
+    return age / 86400 > profile.restart_freq
   end
 
   private

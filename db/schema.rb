@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081027221513) do
+ActiveRecord::Schema.define(:version => 20100818154240) do
 
   create_table "disk_devs", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20081027221513) do
     t.integer  "net_iface_id"
     t.integer  "laboratory_id"
     t.integer  "position",      :default => 1,     :null => false
+    t.integer  "restart_freq",  :default => 0,     :null => false
   end
 
   add_index "profiles", ["name"], :name => "index_profiles_on_name", :unique => true
@@ -118,13 +119,13 @@ ActiveRecord::Schema.define(:version => 20081027221513) do
   add_index "term_params", ["terminal_id"], :name => "index_term_params_on_terminal_id"
 
   create_table "terminals", :force => true do |t|
-    t.string   "ipaddr",                       :null => false
+    t.string   "termid",                       :null => false
     t.string   "serveraddr",                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term_class_id", :default => 1, :null => false
   end
 
-  add_index "terminals", ["ipaddr"], :name => "index_terminals_on_ipaddr", :unique => true
+  add_index "terminals", ["termid"], :name => "index_terminals_on_ipaddr", :unique => true
 
 end
