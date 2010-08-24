@@ -2,7 +2,7 @@ class TerminalsController < GenericComponentController
   class PerIPPermissionDenied < Exception #:nodoc:
   end
   rescue_from PerIPPermissionDenied do |err| 
-    render :text => _('ERROR: %s\n') % err, :status => :forbidden
+    render :text => _("ERROR: %s\n") % err
   end
 
 
