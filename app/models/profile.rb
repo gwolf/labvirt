@@ -161,7 +161,7 @@ class Profile < ActiveRecord::Base
       "-net nic,macaddr=#{mac},model=#{net_iface.name}",
       "-net tap,ifname=tap_#{inst_name},script=/etc/kvm/kvm-ifup",
       "-boot c #{disks}",
-      "-daemonize -nographic",
+      "-daemonize -vnc none",
       "-monitor unix:#{socket},server,nowait"
       ].join(' ')
   end
