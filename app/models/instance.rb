@@ -251,7 +251,7 @@ class Instance
   # restart_freq (indicated in days, with 0 indicating restart is
   # never needed)
   def needs_restart?
-    return false if profile.restart_freq == 0
+    return false if !profile or  profile.restart_freq == 0
     # Age is given in seconds - 86400 seconds to a day
     return age / 86400 > profile.restart_freq
   end

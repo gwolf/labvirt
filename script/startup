@@ -26,6 +26,7 @@ Laboratory.find(:all).map do |lab|
   should_have = lab.start_instances
   active = lab.active_instances.size
   instances = should_have - active
+  instances = 0 if instances < 0
 
   debug 5, 'Attempting to start %d instances (%d already active, %d wanted)' % 
     [instances, active, should_have]
